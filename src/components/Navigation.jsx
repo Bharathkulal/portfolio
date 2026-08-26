@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
+
 
 const navLinks = [
   { label: 'Overview', target: '#hero' },
@@ -59,7 +61,7 @@ export default function Navigation() {
         transition={{ duration: 0.5, ease: 'easeOut' }}
         className={`fixed top-6 left-0 right-0 mx-auto w-[90%] max-w-4xl z-50 transition-all duration-300 ${
           scrolled 
-            ? 'bg-[#0f0f13]/70 backdrop-blur-md border border-[#1a1a24] py-3.5 px-6 rounded-full shadow-lg shadow-black/20' 
+            ? 'bg-brand-card/75 backdrop-blur-md border border-brand-border py-3 px-6 rounded-full shadow-lg shadow-black/5' 
             : 'bg-transparent py-5 px-4'
         }`}
       >
@@ -72,39 +74,46 @@ export default function Navigation() {
             B.KULAL<span className="w-1.5 h-1.5 bg-brand-accent rounded-full animate-pulse"></span>
           </a>
 
-          {/* Desktop Links */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navLinks.map((link) => {
-              const active = activeSection === link.target;
-              return (
-                <a
-                  key={link.target}
-                  href={link.target}
-                  onClick={(e) => handleLinkClick(e, link.target)}
-                  className={`text-xs font-mono tracking-wider transition-all relative py-1 ${
-                    active ? 'text-brand-accent' : 'text-brand-textSecondary hover:text-brand-textPrimary'
-                  }`}
-                >
-                  {link.label}
-                  {active && (
-                    <motion.span 
-                      layoutId="activeIndicator"
-                      className="absolute -bottom-1.5 left-0 right-0 mx-auto w-1 h-1 bg-brand-accent rounded-full"
-                    />
-                  )}
-                </a>
-              );
-            })}
-          </nav>
+          {/* Desktop Links and Theme Toggle */}
+          <div className="hidden md:flex items-center gap-6">
+            <nav className="flex items-center gap-8">
+              {navLinks.map((link) => {
+                const active = activeSection === link.target;
+                return (
+                  <a
+                    key={link.target}
+                    href={link.target}
+                    onClick={(e) => handleLinkClick(e, link.target)}
+                    className={`text-xs font-mono tracking-wider transition-all relative py-1 ${
+                      active ? 'text-brand-accent' : 'text-brand-textSecondary hover:text-brand-textPrimary'
+                    }`}
+                  >
+                    {link.label}
+                    {active && (
+                      <motion.span 
+                        layoutId="activeIndicator"
+                        className="absolute -bottom-1.5 left-0 right-0 mx-auto w-1 h-1 bg-brand-accent rounded-full"
+                      />
+                    )}
+                  </a>
+                );
+              })}
+            </nav>
+            <div className="w-px h-4 bg-brand-border" />
+            <ThemeToggle />
+          </div>
 
-          {/* Mobile toggle */}
-          <button 
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="md:hidden text-brand-textPrimary bg-[#0f0f13] border border-[#1a1a24] p-2 rounded-full hover:border-brand-accent transition-colors"
-            aria-label="Toggle Menu"
-          >
-            {mobileOpen ? <X size={16} /> : <Menu size={16} />}
-          </button>
+          {/* Mobile toggle controls */}
+          <div className="flex items-center gap-3 md:hidden">
+            <ThemeToggle />
+            <button 
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="text-brand-textPrimary bg-brand-card border border-brand-border p-2 rounded-full hover:border-brand-accent transition-colors"
+              aria-label="Toggle Menu"
+            >
+              {mobileOpen ? <X size={16} /> : <Menu size={16} />}
+            </button>
+          </div>
         </div>
       </motion.header>
 

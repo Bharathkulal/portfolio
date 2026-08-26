@@ -65,7 +65,7 @@ export default function About() {
               {directions.map((dir, idx) => (
                 <SectionReveal key={dir.title} delay={0.1 + idx * 0.08}>
                   <div className="p-6 bg-brand-card/40 border border-brand-border/60 rounded-2xl text-left hover:border-brand-accent/40 transition-colors group">
-                    <div className="w-10 h-10 rounded-xl bg-[#14141a] flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
+                    <div className="w-10 h-10 rounded-xl bg-brand-tertiary flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
                       {dir.icon}
                     </div>
                     <h3 className="font-sans font-semibold text-brand-textPrimary text-base mb-2">{dir.title}</h3>

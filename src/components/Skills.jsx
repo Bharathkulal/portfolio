@@ -46,8 +46,8 @@ const getSkillIcon = (skillName) => {
   // Python
   if (name.includes('python')) {
     return (
-      <svg className="w-3.5 h-3.5 fill-[#3776ab]" viewBox="0 0 24 24">
-        <path d="M12 0C5.37 0 0 5.37 0 12c0 6.63 5.37 12 12 12s12-5.37 12-12C24 5.37 18.63 0 12 0zm1.7 18.3c-.5.4-1.2.6-1.9.6-.8 0-1.5-.3-1.9-.7-.5-.4-.7-1.1-.7-1.9H7.5c0 1.3.5 2.4 1.3 3.1.9.8 2.2 1.2 3.8 1.2 1.5 0 2.8-.4 3.6-1.1.9-.8 1.3-1.8 1.3-3.1h-1.7c0 .7-.2 1.3-.7 1.6z"/>
+      <svg className="w-3.5 h-3.5 fill-[#3776ab]" viewBox="0 0 448 512">
+        <path d="M439.8 200.5c-7.7-30.9-22.3-54.2-53.4-54.2h-40.1v47.4c0 36.8-31.2 67.8-68.6 67.8H172.7c-29.2 0-53.4 25-53.4 54.3v101.7c0 29 25.2 46 53.4 54.3 33.8 9.9 66.3 11.7 106.8 0 26.9-7.8 53.4-23.5 53.4-54.3v-40.7H226.2v-24.9h180.7c26.8 0 33.3-17.1 33.3-33.8V254.7c.1-23-4-39.6-20.4-54.2zM286.2 390.6c-11.4 0-20.6-9.2-20.6-20.6 0-11.4 9.2-20.6 20.6-20.6 11.4 0 20.6 9.2 20.6 20.6.1 11.4-9.1 20.6-20.6 20.6zM172.7 243.9h154.7v-47.4c0-29.2-25.2-46-53.4-54.3-33.8-9.9-66.3-11.7-106.8 0-26.9 7.8-53.4 23.5-53.4 54.3v40.7h106.8v24.9H40.1c-26.8 0-33.3 17.1-33.3 33.8v106.8c0 23 4.1 39.6 20.4 54.2 7.7 30.9 22.3 54.2 53.4 54.2h40.1v-47.4c0-36.8 31.2-67.8 68.6-67.8h104.9c29.2 0 53.4-25 53.4-54.3V243.9H172.7zM161.8 121.4c-11.4 0-20.6-9.2-20.6-20.6 0-11.4 9.2-20.6 20.6-20.6 11.4 0 20.6 9.2 20.6 20.6 0 11.4-9.2 20.6-20.6 20.6z"/>
       </svg>
     );
   }
@@ -129,12 +129,12 @@ const skillCategories = [
   { key: "database", title: "Database Systems", color: "border-brand-accent/20 hover:border-brand-accent/40" },
   { key: "aiMl", title: "AI / Machine Learning", color: "border-brand-blue/20 hover:border-brand-blue/40" },
   { key: "iot", title: "IoT / Hardware", color: "border-brand-accent/20 hover:border-brand-accent/40" },
-  { key: "tools", title: "Developer Tools", color: "border-[#1a1a24] hover:border-brand-textSecondary/40" }
+  { key: "tools", title: "Developer Tools", color: "border-brand-border hover:border-brand-textSecondary/40" }
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-24 px-6 md:px-12 bg-[#0c0c10] relative">
+    <section id="skills" className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="absolute top-0 right-1/4 w-px h-full bg-brand-border/10 pointer-events-none" />
 
       <div className="w-full max-w-6xl mx-auto">
@@ -164,7 +164,7 @@ export default function Skills() {
                             className={`px-3 py-1.5 rounded-lg text-xs font-mono border transition-all duration-200 flex items-center gap-2 ${
                               isReact 
                                 ? 'bg-brand-blue/5 border-brand-blue/25 text-brand-blue font-medium' 
-                                : 'bg-[#14141a]/60 border-brand-border/60 text-brand-textPrimary hover:border-brand-accent/30'
+                                : 'bg-brand-tertiary/60 border-brand-border/60 text-brand-textPrimary hover:border-brand-accent/30'
                             }`}
                           >
                             {getSkillIcon(skill)}

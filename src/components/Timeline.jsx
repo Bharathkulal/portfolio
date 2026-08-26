@@ -5,7 +5,7 @@ import { GraduationCap, Calendar } from 'lucide-react';
 
 export default function Timeline() {
   return (
-    <section id="journey" className="py-24 px-6 md:px-12 bg-[#0c0c10] relative">
+    <section id="journey" className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="absolute top-0 left-1/3 w-px h-full bg-brand-border/10 pointer-events-none" />
 
       <div className="w-full max-w-4xl mx-auto">

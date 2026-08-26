@@ -2,15 +2,50 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  /* Light Theme (Premium white editorial style) */
+  --bg-primary: #f7f7f5;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f0f0ed;
+  --border-color: #e5e7eb;
+  --text-primary: #111111;
+  --text-secondary: #5f6368;
+  --text-muted: #9ca3af;
+  --accent-color: #00b347; /* Slightly darker green for readability on white */
+  --accent-blue: #0077b6;  /* Deeper blue for readability on white */
+  --grid-opacity: 0.05;
+  --pulse-dot-color: #00b347;
+}
+
+.dark {
+  /* Dark Theme (Default high-tech charcoal style) */
+  --bg-primary: #08080a;
+  --bg-secondary: #0f0f13;
+  --bg-tertiary: #14141a;
+  --border-color: #1a1a24;
+  --text-primary: #e2e2e9;
+  --text-secondary: #8e8e9f;
+  --text-muted: #535366;
+  --accent-color: #00ff66;
+  --accent-blue: #00e5ff;
+  --grid-opacity: 0.25;
+  --pulse-dot-color: #00ff66;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
-    background-color: #08080a;
-    color: #e2e2e9;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
     font-family: 'Inter', sans-serif;
   }
   body {
     overflow-x: hidden;
+  }
+  
+  /* Smooth global transitions for theme changes */
+  html, body, header, nav, a, p, h1, h2, h3, h4, span, ul, li, button, input, textarea, div {
+    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
   }
 }
 
@@ -19,30 +54,30 @@
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #08080a;
+  background: var(--bg-primary);
 }
 ::-webkit-scrollbar-thumb {
-  background: #1a1a24;
+  background: var(--bg-tertiary);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #00ff66;
+  background: var(--accent-color);
 }
 
 /* Technical grid backdrop animation */
 .tech-grid-bg {
   background-image: 
-    linear-gradient(rgba(26, 26, 36, 0.25) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 26, 36, 0.25) 1px, transparent 1px);
+    linear-gradient(rgba(26, 26, 36, var(--grid-opacity)) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(26, 26, 36, var(--grid-opacity)) 1px, transparent 1px);
   background-size: 50px 50px;
 }
 
 /* Custom glassmorphism elements */
 .glass-panel {
-  background: rgba(15, 15, 19, 0.65);
+  background: rgba(var(--bg-secondary), 0.65);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(26, 26, 36, 0.8);
+  border: 1px solid var(--border-color);
 }
 
 /* Caret blinking animation keyframes */
@@ -50,4 +85,3 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
-

@@ -12,13 +12,14 @@ export default {
       },
       colors: {
         brand: {
-          bg: '#08080a',
-          card: '#0f0f13',
-          border: '#1a1a24',
-          accent: '#00ff66',  /* Signal Green */
-          blue: '#00e5ff',    /* Telemetry Blue */
-          textPrimary: '#e2e2e9',
-          textSecondary: '#8e8e9f',
+          bg: 'var(--bg-primary)',
+          card: 'var(--bg-secondary)',
+          tertiary: 'var(--bg-tertiary)',
+          border: 'var(--border-color)',
+          accent: 'var(--accent-color)',
+          blue: 'var(--accent-blue)',
+          textPrimary: 'var(--text-primary)',
+          textSecondary: 'var(--text-secondary)',
         }
       }
     },

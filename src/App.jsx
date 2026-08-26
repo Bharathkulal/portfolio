@@ -12,14 +12,16 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import SectionReveal from './components/SectionReveal';
 import { projectsData } from './data/portfolioData';
+import { ThemeProvider } from './context/ThemeContext';
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
-    <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
-      {/* Background Decorative Tech Outlines */}
-      <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
+    <ThemeProvider>
+      <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
+        {/* Background Decorative Tech Outlines */}
+        <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
 
       {/* Navigation Pill Overlay */}
       <Navigation />
@@ -90,6 +92,7 @@ export default function App() {
           <span>BUILD: STABLE // HOSTED: GITHUB_PAGES</span>
         </div>
       </footer>
-    </div>
+      </div>
+    </ThemeProvider>
   );
 }

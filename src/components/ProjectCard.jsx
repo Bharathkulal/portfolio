@@ -29,16 +29,16 @@ export default function ProjectCard({ project, onClick }) {
 
   const tiltStyle = isHovered && !isTouch
     ? {
-        transform: `perspective(1000px) rotateX(${-(coords.y / 20)}deg) rotateY(${coords.x / 20}deg) scale(1.02)`,
-        transition: 'transform 0.1s cubic-bezier(0.25, 1, 0.5, 1)'
-      }
+      transform: `perspective(1000px) rotateX(${-(coords.y / 20)}deg) rotateY(${coords.x / 20}deg) scale(1.02)`,
+      transition: 'transform 0.1s cubic-bezier(0.25, 1, 0.5, 1)'
+    }
     : {
-        transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
-        transition: 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)'
-      };
+      transform: 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale(1)',
+      transition: 'transform 0.5s cubic-bezier(0.25, 1, 0.5, 1)'
+    };
 
   return (
-    <div 
+    <div
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={() => setIsHovered(true)}
@@ -57,15 +57,14 @@ export default function ProjectCard({ project, onClick }) {
             {project.name}
           </h3>
         </div>
-        
+
         {/* Project Status Indicators */}
-        <span className={`font-mono text-[9px] px-2 py-0.5 rounded border uppercase tracking-wider ${
-          project.statusType === 'live' 
+        <span className={`font-mono text-[9px] px-2 py-0.5 rounded border uppercase tracking-wider ${project.statusType === 'live'
             ? 'bg-brand-accent/5 border-brand-accent/30 text-brand-accent'
             : project.statusType === 'dev'
-            ? 'bg-brand-blue/5 border-brand-blue/30 text-brand-blue'
-            : 'bg-yellow-500/5 border-yellow-500/30 text-yellow-500'
-        }`}>
+              ? 'bg-brand-blue/5 border-brand-blue/30 text-brand-blue'
+              : 'bg-yellow-500/5 border-yellow-500/30 text-yellow-500'
+          }`}>
           {project.status}
         </span>
       </div>
@@ -73,7 +72,7 @@ export default function ProjectCard({ project, onClick }) {
       {/* Visual / Screenshot Mock Area */}
       <div className="relative mx-6 h-36 rounded-2xl overflow-hidden bg-brand-bg/80 border border-brand-border flex items-center justify-center group-hover:border-brand-accent/20 transition-all">
         <div className="absolute inset-0 bg-gradient-to-t from-brand-card to-transparent opacity-40" />
-        
+
         {/* Placeholder mesh */}
         <div className="absolute inset-0 opacity-5 tech-grid-bg" />
 
@@ -84,8 +83,8 @@ export default function ProjectCard({ project, onClick }) {
         </div>
 
         {/* Image overlay when file populated */}
-        <img 
-          src={project.image} 
+        <img
+          src={project.image}
           alt={project.name}
           onError={(e) => e.target.style.display = 'none'}
           className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -97,7 +96,7 @@ export default function ProjectCard({ project, onClick }) {
         <p className="text-xs text-brand-textSecondary leading-relaxed mb-4 line-clamp-2">
           {project.description}
         </p>
-        
+
         <div className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1.5">
             {project.tags.slice(0, 3).map(tag => (
@@ -108,7 +107,7 @@ export default function ProjectCard({ project, onClick }) {
           </div>
 
           <button className="flex items-center gap-1 font-mono text-[10px] text-brand-accent font-semibold tracking-wider transition-all hover:text-brand-textPrimary">
-            INSPECT SPEC 
+            INSPECT SPEC
             <ExternalLink size={10} />
           </button>
         </div>

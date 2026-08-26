@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Download, Terminal } from 'lucide-react';
+import { ArrowRight, Terminal } from 'lucide-react';
 import TypingText from './TypingText';
 
 export default function Hero() {
@@ -26,37 +26,35 @@ export default function Hero() {
   };
 
   const imageVariants = {
-    hidden: { opacity: 0, scale: 0.95, clipPath: 'inset(100% 0% 0% 0%)' },
+    hidden: { opacity: 0, scale: 0.98 },
     visible: {
       opacity: 1,
       scale: 1,
-      clipPath: 'inset(0% 0% 0% 0%)',
-      transition: { duration: 1.2, ease: [0.25, 1, 0.5, 1], delay: 0.5 }
+      transition: { duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.3 }
     }
   };
 
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen flex items-center justify-center pt-24 px-6 md:px-12 tech-grid-bg overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col lg:flex-row items-stretch tech-grid-bg overflow-hidden"
     >
       {/* Background Soft Glows */}
       <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-brand-blue/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center relative z-10">
-        
-        {/* Left Column: Text Content */}
+      {/* Left Column: Text Content */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left px-6 sm:px-12 lg:px-20 py-32 lg:py-12 z-10 relative">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-6 flex flex-col items-start text-left"
+          className="flex flex-col items-start w-full"
         >
           {/* Technical Tag */}
           <motion.div 
             variants={itemVariants}
-            className="flex items-center gap-2 border border-[#1a1a24] bg-[#0f0f13] px-3.5 py-1.5 rounded-full mb-6"
+            className="flex items-center gap-2 border border-brand-border bg-[#0f0f13] px-3.5 py-1.5 rounded-full mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
             <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase">SYSTEM_INIT // B.KULAL_PORTFOLIO</span>
@@ -114,25 +112,24 @@ export default function Hero() {
             </a>
           </motion.div>
         </motion.div>
+      </div>
 
-        {/* Right Column: Visual Frame */}
-        <div className="lg:col-span-6 flex justify-center lg:justify-end">
-          <motion.div 
-            variants={imageVariants}
-            initial="hidden"
-            animate="visible"
-            className="relative w-full max-w-[480px] aspect-[4/5] overflow-hidden group"
-          >
-            <img 
-              src="/images/profile.jpg" 
-              alt="Bharath Kulal" 
-              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-            />
-            
-            {/* Soft Shadow Base Glow */}
-            <div className="absolute -bottom-4 -left-4 w-full h-full bg-brand-accent/5 rounded-full blur-[80px] -z-10" />
-          </motion.div>
-        </div>
+      {/* Right Column: Visual Frame */}
+      <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-0 h-auto lg:h-screen z-10">
+        <motion.div 
+          variants={imageVariants}
+          initial="hidden"
+          animate="visible"
+          className="absolute inset-0 w-full h-full overflow-hidden group"
+        >
+          <img 
+            src="/images/profile.jpg" 
+            alt="Bharath Kulal" 
+            className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+          />
+          {/* Subtle gradient overlay to blend picture with background on left/bottom edges */}
+          <div className="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-brand-bg via-transparent to-transparent opacity-95 pointer-events-none lg:w-1/3 h-full" />
+        </motion.div>
       </div>
     </section>
   );
