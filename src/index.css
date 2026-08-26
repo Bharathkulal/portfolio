@@ -12,12 +12,6 @@
   body {
     overflow-x: hidden;
   }
-  /* Hide standard cursor on non-touch screens */
-  @media (pointer: fine) {
-    * {
-      cursor: none !important;
-    }
-  }
 }
 
 /* Custom Scrollbar */

@@ -49,7 +49,7 @@ export default function Hero() {
           variants={containerVariants}
           initial="hidden"
           animate="visible"
-          className="lg:col-span-7 flex flex-col items-start text-left"
+          className="lg:col-span-6 flex flex-col items-start text-left"
         >
           {/* Technical Tag */}
           <motion.div 
@@ -118,40 +118,18 @@ export default function Hero() {
         </motion.div>
 
         {/* Right Column: Visual Frame */}
-        <div className="lg:col-span-5 flex justify-center lg:justify-end">
+        <div className="lg:col-span-6 flex justify-center lg:justify-end">
           <motion.div 
             variants={imageVariants}
             initial="hidden"
             animate="visible"
-            className="relative w-full max-w-[340px] aspect-[4/5] rounded-3xl overflow-hidden border border-brand-border/60 shadow-2xl group"
+            className="relative w-full max-w-[480px] aspect-[4/5] overflow-hidden group"
           >
-            {/* Technical Border Outlines */}
-            <div className="absolute inset-2 border border-dashed border-brand-border/40 rounded-[22px] pointer-events-none z-10" />
-            <div className="absolute top-4 left-4 font-mono text-[9px] text-brand-textSecondary/60 z-10">B.KULAL_IMG_01</div>
-
-            {/* Profile Image Asset/Placeholder */}
-            <div className="w-full h-full bg-[#0f0f13] flex flex-col items-center justify-center relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-bg via-transparent to-transparent opacity-80 z-10" />
-              
-              {/* Fallback avatar icon inside placeholder */}
-              <div className="flex flex-col items-center justify-center text-center p-8 z-20">
-                <div className="w-20 h-20 rounded-full border border-brand-border flex items-center justify-center mb-4 bg-brand-bg">
-                  <Terminal size={32} className="text-brand-accent" />
-                </div>
-                <span className="font-mono text-xs text-brand-textPrimary font-semibold mb-2">IMAGE PLACEHOLDER</span>
-                <span className="font-mono text-[9px] text-brand-textSecondary/70 uppercase max-w-[180px]">
-                  Replace path in `/public/images/profile.jpg`
-                </span>
-              </div>
-
-              {/* Real image overlay (hidden till path mapped) */}
-              <img 
-                src="/images/profile.jpg" 
-                alt="Bharath Kulal" 
-                onError={(e) => e.target.style.display = 'none'} 
-                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-            </div>
+            <img 
+              src="/images/profile.jpg" 
+              alt="Bharath Kulal" 
+              className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+            />
             
             {/* Soft Shadow Base Glow */}
             <div className="absolute -bottom-4 -left-4 w-full h-full bg-brand-accent/5 rounded-full blur-[80px] -z-10" />

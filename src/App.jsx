@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import CustomCursor from './components/CustomCursor';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -22,9 +21,6 @@ export default function App() {
       {/* Background Decorative Tech Outlines */}
       <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
 
-      {/* Global Interactive Polish */}
-      <CustomCursor />
-      
       {/* Navigation Pill Overlay */}
       <Navigation />
 
