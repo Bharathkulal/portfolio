@@ -86,7 +86,7 @@ export default function App() {
       )}
 
       {/* Global Mini Technical Footer */}
-      <footer className="py-12 border-t border-brand-border/60 bg-[#0c0c10] text-center font-mono text-[9px] text-brand-textSecondary tracking-wider">
+      <footer className="py-12 border-t border-brand-border/60 bg-brand-bg text-center font-mono text-[9px] text-brand-textSecondary tracking-wider">
         <div className="w-full max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
           <span>BHARATH KULAL // PORTFOLIO_v3.0.0</span>
           <span>BUILD: STABLE // HOSTED: GITHUB_PAGES</span>

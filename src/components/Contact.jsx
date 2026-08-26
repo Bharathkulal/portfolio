@@ -137,7 +137,7 @@ export default function Contact() {
                       placeholder="[ Enter your name ]"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="bg-[#0c0c10] border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
+                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
                     />
                   </div>
 
@@ -152,7 +152,7 @@ export default function Contact() {
                       placeholder="[ Enter your email address ]"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="bg-[#0c0c10] border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
+                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
                     />
                   </div>
 
@@ -167,7 +167,7 @@ export default function Contact() {
                       placeholder="[ Enter your message content here... ]"
                       value={formState.message}
                       onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      className="bg-[#0c0c10] border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors resize-none"
+                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors resize-none"
                     />
                   </div>
 
@@ -182,7 +182,7 @@ export default function Contact() {
 
                 {/* Submission Success Alert */}
                 {submitted && (
-                  <div className="absolute inset-0 bg-[#0f0f13] flex flex-col items-center justify-center rounded-3xl p-6 text-center animate-fade-in">
+                  <div className="absolute inset-0 bg-brand-card flex flex-col items-center justify-center rounded-3xl p-6 text-center animate-fade-in">
                     <CheckCircle2 size={36} className="text-brand-accent mb-3 animate-bounce" />
                     <span className="font-mono text-xs text-brand-textPrimary font-semibold mb-2">TRANSMISSION COMPLETELY LOGGED</span>
                     <p className="text-brand-textSecondary text-[11px] leading-relaxed max-w-[240px]">

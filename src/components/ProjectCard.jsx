@@ -100,7 +100,7 @@ export default function ProjectCard({ project, onClick }) {
         <div className="flex justify-between items-center">
           <div className="flex flex-wrap gap-1.5">
             {project.tags.slice(0, 3).map(tag => (
-              <span key={tag} className="font-mono text-[9px] text-brand-textSecondary bg-[#14141a] px-2 py-0.5 rounded border border-brand-border/60">
+              <span key={tag} className="font-mono text-[9px] text-brand-textSecondary bg-brand-tertiary px-2 py-0.5 rounded border border-brand-border/60">
                 {tag}
               </span>
             ))}

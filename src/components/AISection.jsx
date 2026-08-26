@@ -29,7 +29,7 @@ const pipelineBlocks = [
 export default function AISection() {
   return (
     <section id="ai-focus" className="py-24 px-6 md:px-12 bg-brand-bg relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0c0c10]/40 to-transparent pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/40 to-transparent pointer-events-none" />
 
       <div className="w-full max-w-6xl mx-auto">
         <SectionReveal>
@@ -57,7 +57,7 @@ export default function AISection() {
 
             {/* Simulated Live telemetry stats */}
             <SectionReveal delay={0.2}>
-              <div className="p-5 border border-brand-border/60 bg-[#0f0f13]/60 rounded-2xl flex items-center gap-4">
+              <div className="p-5 border border-brand-border/60 bg-brand-card/60 rounded-2xl flex items-center gap-4">
                 <div className="w-10 h-10 rounded-full bg-brand-accent/5 border border-brand-accent/20 flex items-center justify-center text-brand-accent animate-pulse">
                   <Activity size={18} />
                 </div>

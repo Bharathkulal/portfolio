@@ -5,7 +5,7 @@ import { Award, ShieldAlert } from 'lucide-react';
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="py-24 px-6 md:px-12 bg-[#0c0c10] relative">
+    <section id="certifications" className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="w-full max-w-5xl mx-auto">
         <SectionReveal>
           <div className="flex items-center gap-4 mb-16">

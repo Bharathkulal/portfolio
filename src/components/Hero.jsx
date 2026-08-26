@@ -54,7 +54,7 @@ export default function Hero() {
           {/* Technical Tag */}
           <motion.div 
             variants={itemVariants}
-            className="flex items-center gap-2 border border-brand-border bg-[#0f0f13] px-3.5 py-1.5 rounded-full mb-6"
+            className="flex items-center gap-2 border border-brand-border bg-brand-card px-3.5 py-1.5 rounded-full mb-6"
           >
             <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
             <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase">SYSTEM_INIT // B.KULAL_PORTFOLIO</span>
@@ -105,7 +105,7 @@ export default function Hero() {
                 e.preventDefault();
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="flex items-center gap-2 border border-brand-border bg-[#0f0f13]/60 hover:bg-[#1a1a24] text-brand-textPrimary hover:border-brand-textSecondary px-7 py-3.5 rounded-full font-medium text-sm transition-all"
+              className="flex items-center gap-2 border border-brand-border bg-brand-card/60 hover:bg-brand-tertiary text-brand-textPrimary hover:border-brand-textSecondary px-7 py-3.5 rounded-full font-medium text-sm transition-all"
             >
               Get In Touch 
               <Terminal size={14} className="text-brand-textSecondary" />

@@ -170,7 +170,7 @@ export default function ProjectModal({ project, onClose }) {
             
             <button 
               onClick={onClose}
-              className="text-brand-textSecondary hover:text-brand-accent bg-[#14141a] p-1.5 rounded-full border border-brand-border hover:border-brand-accent/40 transition-colors"
+              className="text-brand-textSecondary hover:text-brand-accent bg-brand-tertiary p-1.5 rounded-full border border-brand-border hover:border-brand-accent/40 transition-colors"
               aria-label="Close Modal"
             >
               <X size={18} />
@@ -207,7 +207,7 @@ export default function ProjectModal({ project, onClose }) {
                 <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3">
                   02 / PROBLEM STATEMENT
                 </h4>
-                <p className="text-brand-textSecondary text-xs leading-relaxed bg-[#14141a]/40 border border-brand-border p-4 rounded-xl">
+                <p className="text-brand-textSecondary text-xs leading-relaxed bg-brand-tertiary/40 border border-brand-border p-4 rounded-xl">
                   {project.problem}
                 </p>
               </div>
@@ -216,7 +216,7 @@ export default function ProjectModal({ project, onClose }) {
                 <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3">
                   03 / SOLUTION DESIGN
                 </h4>
-                <p className="text-brand-textSecondary text-xs leading-relaxed bg-[#14141a]/40 border border-brand-border p-4 rounded-xl">
+                <p className="text-brand-textSecondary text-xs leading-relaxed bg-brand-tertiary/40 border border-brand-border p-4 rounded-xl">
                   {project.solution}
                 </p>
               </div>
@@ -228,7 +228,7 @@ export default function ProjectModal({ project, onClose }) {
                 <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3">
                   04 / KEY FEATURES
                 </h4>
-                <ul className="text-brand-textSecondary text-xs leading-relaxed bg-[#14141a]/40 border border-brand-border p-4 rounded-xl flex flex-col gap-2">
+                <ul className="text-brand-textSecondary text-xs leading-relaxed bg-brand-tertiary/40 border border-brand-border p-4 rounded-xl flex flex-col gap-2">
                   {project.features.map((feat, idx) => (
                     <li key={idx} className="flex gap-2 items-start">
                       <span className="text-brand-accent font-semibold">•</span>
@@ -242,7 +242,7 @@ export default function ProjectModal({ project, onClose }) {
                 <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3">
                   05 / ACQUIRED CAPABILITIES
                 </h4>
-                <p className="text-brand-textSecondary text-xs leading-relaxed bg-[#14141a]/40 border border-brand-border p-4 rounded-xl">
+                <p className="text-brand-textSecondary text-xs leading-relaxed bg-brand-tertiary/40 border border-brand-border p-4 rounded-xl">
                   {project.learned}
                 </p>
               </div>
@@ -265,7 +265,7 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer controls */}
-          <div className="border-t border-brand-border px-6 md:px-8 py-5 bg-[#0c0c10] flex flex-wrap gap-4 items-center justify-between sticky bottom-0 z-20">
+          <div className="border-t border-brand-border px-6 md:px-8 py-5 bg-brand-bg flex flex-wrap gap-4 items-center justify-between sticky bottom-0 z-20">
             <div className="flex gap-4">
               <a 
                 href={project.github}

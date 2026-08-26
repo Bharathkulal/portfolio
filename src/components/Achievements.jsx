@@ -51,7 +51,7 @@ export default function Achievements() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {activitiesData.competitions.map((comp, idx) => (
-                  <div key={idx} className="p-4 bg-[#14141a]/60 border border-brand-border/40 rounded-xl flex items-center gap-3">
+                  <div key={idx} className="p-4 bg-brand-tertiary/60 border border-brand-border/40 rounded-xl flex items-center gap-3">
                     <div className="w-6 h-6 rounded bg-brand-blue/5 border border-brand-blue/20 flex items-center justify-center text-[10px] font-mono text-brand-blue font-bold">
                       {idx + 1}
                     </div>

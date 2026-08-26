@@ -12,14 +12,14 @@ export default {
       },
       colors: {
         brand: {
-          bg: 'var(--bg-primary)',
-          card: 'var(--bg-secondary)',
-          tertiary: 'var(--bg-tertiary)',
-          border: 'var(--border-color)',
-          accent: 'var(--accent-color)',
-          blue: 'var(--accent-blue)',
-          textPrimary: 'var(--text-primary)',
-          textSecondary: 'var(--text-secondary)',
+          bg: 'var(--bg)',
+          card: 'var(--surface)',
+          tertiary: 'var(--surface-2)',
+          border: 'var(--border)',
+          accent: 'var(--accent)',
+          blue: 'var(--accent)',
+          textPrimary: 'var(--text)',
+          textSecondary: 'var(--muted)',
         }
       }
     },
