@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Download, Terminal } from 'lucide-react';
+import TypingText from './TypingText';
 
 export default function Hero() {
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -77,14 +79,10 @@ export default function Hero() {
             <span className="text-brand-blue">FULL-STACK BUILDER</span>
           </motion.div>
 
-          {/* Pitch */}
-          <motion.p 
-            variants={itemVariants}
-            className="text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 leading-relaxed font-light"
-          >
-            I am a BCA student specializing in Artificial Intelligence & Machine Learning. 
-            I learn technology by engineering real systems to solve real-world problems.
-          </motion.p>
+          <TypingText 
+            text="I am a BCA student specializing in Artificial Intelligence & Machine Learning. I learn technology by engineering real systems to solve real-world problems."
+            className="text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 font-light"
+          />
 
           {/* Call to Actions */}
           <motion.div 
