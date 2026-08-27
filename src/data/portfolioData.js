@@ -149,7 +149,7 @@ export const projectsData = [
 ];
 
 export const skillsData = {
-  frontend: ["HTML", "CSS", "JavaScript", "React.js (Beginner)"],
+  frontend: ["HTML", "CSS", "JavaScript", "React.js"],
   programming: ["Python", "C", "Java"],
   database: ["MySQL", "MongoDB"],
   aiMl: ["Artificial Intelligence", "Machine Learning", "Data Science", "Generative AI"],
