@@ -37,7 +37,7 @@ export default function Hero() {
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen w-full flex flex-col lg:flex-row items-stretch tech-grid-bg overflow-hidden"
+      className="relative min-h-screen w-full flex flex-col lg:flex-row items-stretch overflow-hidden"
     >
       {/* Background Soft Glows */}
       <div className="absolute top-[20%] left-[10%] w-[350px] h-[350px] bg-brand-accent/5 rounded-full blur-[120px] pointer-events-none" />

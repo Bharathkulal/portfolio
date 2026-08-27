@@ -21,7 +21,7 @@
 /* Dark Theme overrides when data-theme is dark */
 :root[data-theme="dark"],
 [data-theme="dark"] {
-  --bg: #08090a;
+  --bg: #000000;
   --surface: #101214;
   --surface-2: #151719;
   --text: #f5f5f5;

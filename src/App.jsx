@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
@@ -14,12 +15,15 @@ import SectionReveal from './components/SectionReveal';
 import { projectsData } from './data/portfolioData';
 import { ThemeProvider, useTheme } from './context/ThemeContext';
 
+// Admin Components
+import Login from './admin/Login';
+import DashboardLayout from './admin/DashboardLayout';
+
 function ThemeDebug() {
   const { theme } = useTheme();
   const [bgVal, setBgVal] = React.useState('');
 
   React.useEffect(() => {
-    // Read computed value after DOM updates
     const timer = setTimeout(() => {
       setBgVal(getComputedStyle(document.documentElement).getPropertyValue('--bg'));
     }, 100);
@@ -33,15 +37,37 @@ function ThemeDebug() {
   );
 }
 
-export default function App() {
+function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
+  const [dynProjects, setDynProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch dynamic projects from server, fall back to local mock data if offline
+  React.useEffect(() => {
+    const loadProjects = async () => {
+      try {
+        const res = await fetch('http://localhost:8000/api/projects');
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.length > 0) {
+            setDynProjects(data);
+            setLoading(false);
+            return;
+          }
+        }
+      } catch (error) {
+        console.warn('Backend offline, using local static data fallback.');
+      }
+      setDynProjects(projectsData);
+      setLoading(false);
+    };
+    loadProjects();
+  }, []);
 
   return (
-    <ThemeProvider>
-      <ThemeDebug />
-      <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
-        {/* Background Decorative Tech Outlines */}
-        <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
+    <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
+      {/* Background Decorative Tech Outlines */}
+      <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
 
       {/* Navigation Pill Overlay */}
       <Navigation />
@@ -68,15 +94,26 @@ export default function App() {
             </SectionReveal>
 
             <SectionReveal delay={0.1}>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                {projectsData.map((project, idx) => (
-                  <ProjectCard 
-                    key={project.id} 
-                    project={project} 
-                    onClick={() => setSelectedProject(project)} 
-                  />
-                ))}
-              </div>
+              {loading ? (
+                <div className="h-44 flex items-center justify-center font-mono text-xs text-brand-textSecondary">
+                  Loading work portfolio...
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {dynProjects.map((project) => (
+                    <ProjectCard 
+                      key={project._id || project.id} 
+                      project={{
+                        ...project,
+                        id: project._id || project.id,
+                        // support dynamic schemas that might save technologies as tags or array
+                        tags: project.technologies || project.tags || []
+                      }} 
+                      onClick={() => setSelectedProject(project)} 
+                    />
+                  ))}
+                </div>
+              )}
             </SectionReveal>
           </div>
         </section>
@@ -100,7 +137,11 @@ export default function App() {
       {/* Dynamic Inspector Drawer Modal */}
       {selectedProject && (
         <ProjectModal 
-          project={selectedProject} 
+          project={{
+            ...selectedProject,
+            id: selectedProject._id || selectedProject.id,
+            tags: selectedProject.technologies || selectedProject.tags || []
+          }} 
           onClose={() => setSelectedProject(null)} 
         />
       )}
@@ -112,7 +153,21 @@ export default function App() {
           <span>BUILD: STABLE // HOSTED: GITHUB_PAGES</span>
         </div>
       </footer>
-      </div>
+    </div>
+  );
+}
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <ThemeDebug />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/admin/login" element={<Login />} />
+          <Route path="/admin/*" element={<DashboardLayout />} />
+          <Route path="/" element={<PublicPortfolio />} />
+        </Routes>
+      </BrowserRouter>
     </ThemeProvider>
   );
 }
