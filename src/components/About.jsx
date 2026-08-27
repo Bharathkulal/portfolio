@@ -31,7 +31,7 @@ export default function About() {
       {/* Background decoration lines */}
       <div className="absolute top-0 left-1/4 w-px h-full bg-brand-border/10 pointer-events-none" />
 
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
         <SectionReveal>
           <div className="flex items-center gap-4 mb-16">
             <span className="font-mono text-xs text-brand-accent">01 — ABOUT</span>

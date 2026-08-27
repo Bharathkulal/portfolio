@@ -31,7 +31,7 @@ export default function AISection() {
     <section id="ai-focus" className="py-24 px-6 md:px-12 bg-brand-bg relative">
       <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/40 to-transparent pointer-events-none" />
 
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
         <SectionReveal>
           <div className="flex items-center gap-4 mb-16">
             <span className="font-mono text-xs text-brand-accent">03 — AI / ML SPECIALIZATION</span>

@@ -6,7 +6,7 @@ import { Award, ShieldAlert } from 'lucide-react';
 export default function Certifications() {
   return (
     <section id="certifications" className="py-24 px-6 md:px-12 bg-brand-bg relative">
-      <div className="w-full max-w-5xl mx-auto">
+      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
         <SectionReveal>
           <div className="flex items-center gap-4 mb-16">
             <span className="font-mono text-xs text-brand-accent">06 — CREDENTIALS</span>

@@ -46,11 +46,12 @@
   body {
     margin: 0;
     overflow-x: hidden;
-    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
+    -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+    transition: background-color 300ms ease, color 300ms ease;
   }
 
-  /* Apply smooth transitions globally for theme shifts */
-  header, nav, a, p, h1, h2, h3, h4, span, ul, li, button, input, textarea, div, section {
+  /* Target smooth theme transition to layout containers rather than all elements */
+  .theme-transition {
     transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
   }
 }

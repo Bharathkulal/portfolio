@@ -324,7 +324,7 @@ export default function Skills() {
       {/* Background decoration line */}
       <div className="absolute top-0 right-1/4 w-px h-full bg-brand-border/5 pointer-events-none" />
 
-      <div className="w-full max-w-6xl mx-auto px-6 relative z-10 text-left">
+      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto relative z-10 text-left">
         <motion.div
           initial="hidden"
           whileInView="visible"

@@ -32,7 +32,7 @@ export default function Contact() {
       {/* Background radial highlight */}
       <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="w-full max-w-5xl mx-auto">
+      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
         <SectionReveal>
           <div className="flex items-center gap-4 mb-16">
             <span className="font-mono text-xs text-brand-accent">07 — CONNECTION</span>
