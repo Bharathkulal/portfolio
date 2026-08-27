@@ -91,3 +91,51 @@
   0%, 100% { opacity: 1; }
   50% { opacity: 0; }
 }
+
+/* Marquee Scroll Animations */
+@keyframes marqueeLeft {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-100%, 0, 0); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translate3d(-100%, 0, 0); }
+  100% { transform: translate3d(0, 0, 0); }
+}
+
+.animate-marquee-left {
+  animation: marqueeLeft linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+.animate-marquee-right {
+  animation: marqueeRight linear infinite;
+  will-change: transform;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+}
+
+/* Orbit Rotations */
+@keyframes orbitClockwise {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes orbitCounterClockwise {
+  0% { transform: rotate(360deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.animate-orbit-clockwise {
+  animation: orbitClockwise 60s linear infinite;
+  will-change: transform;
+}
+
+.animate-orbit-counter-clockwise {
+  animation: orbitCounterClockwise 60s linear infinite;
+  will-change: transform;
+}
+
+
