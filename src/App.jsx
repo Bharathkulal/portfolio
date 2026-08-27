@@ -46,7 +46,11 @@ function PublicPortfolio() {
   React.useEffect(() => {
     const loadProjects = async () => {
       try {
-        const res = await fetch('http://localhost:8000/api/projects');
+        const res = await fetch(
+          window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8000/api/projects'
+            : 'https://bharath-portfolio-backend.onrender.com/api/projects'
+        );
         if (res.ok) {
           const data = await res.json();
           if (data && data.length > 0) {
