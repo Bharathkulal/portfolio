@@ -12,13 +12,33 @@ import Certifications from './components/Certifications';
 import Contact from './components/Contact';
 import SectionReveal from './components/SectionReveal';
 import { projectsData } from './data/portfolioData';
-import { ThemeProvider } from './context/ThemeContext';
+import { ThemeProvider, useTheme } from './context/ThemeContext';
+
+function ThemeDebug() {
+  const { theme } = useTheme();
+  const [bgVal, setBgVal] = React.useState('');
+
+  React.useEffect(() => {
+    // Read computed value after DOM updates
+    const timer = setTimeout(() => {
+      setBgVal(getComputedStyle(document.documentElement).getPropertyValue('--bg'));
+    }, 100);
+    return () => clearTimeout(timer);
+  }, [theme]);
+
+  return (
+    <div className="fixed bottom-4 left-4 bg-black/80 border border-brand-border text-brand-textPrimary p-4 rounded-xl z-50 text-xs font-mono">
+      THEME: {theme} | ATTR: {document.documentElement.getAttribute('data-theme')} | BG: {bgVal}
+    </div>
+  );
+}
 
 export default function App() {
   const [selectedProject, setSelectedProject] = useState(null);
 
   return (
     <ThemeProvider>
+      <ThemeDebug />
       <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
         {/* Background Decorative Tech Outlines */}
         <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />

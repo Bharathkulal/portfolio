@@ -60,25 +60,31 @@ export default function Hero() {
             <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase">SYSTEM_INIT // B.KULAL_PORTFOLIO</span>
           </motion.div>
 
+          {/* Small intro text */}
+          <motion.p 
+            variants={itemVariants}
+            className="font-mono text-xs md:text-sm text-brand-textSecondary mb-2 tracking-wider"
+          >
+            Hey, I’m
+          </motion.p>
+
           {/* Name & Titles */}
           <motion.h1 
             variants={itemVariants}
             className="font-sans text-5xl md:text-7xl font-extrabold tracking-tight text-brand-textPrimary mb-4"
           >
-            BHARATH KULAL
+            Bharath Kulal
           </motion.h1>
 
           <motion.div 
             variants={itemVariants}
-            className="flex flex-wrap items-center gap-x-4 gap-y-2 mb-6 font-mono text-sm md:text-base text-brand-accent font-medium"
+            className="font-mono text-sm md:text-base text-brand-accent font-medium mb-6"
           >
-            <span>AI / ML DEVELOPER</span>
-            <span className="text-brand-border">•</span>
-            <span className="text-brand-blue">FULL-STACK BUILDER</span>
+            AI / ML Developer · Full-Stack Builder
           </motion.div>
 
           <TypingText 
-            text="I am a BCA student specializing in Artificial Intelligence & Machine Learning. I learn technology by engineering real systems to solve real-world problems."
+            text="I build with AI, solve real-world problems, and create modern digital experiences."
             className="text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 font-light"
           />
 
