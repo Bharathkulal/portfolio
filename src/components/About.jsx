@@ -25,7 +25,15 @@ const directions = [
   }
 ];
 
-export default function About() {
+export default function About({ aboutInfo }) {
+  const goal = aboutInfo?.goal || "Engineering intelligent systems by writing code and building.";
+  const bioParagraphs = aboutInfo?.bio 
+    ? aboutInfo.bio.split(/\n\n+/).filter(Boolean)
+    : [
+        "I am Bharath Kulal, a BCA student specializing in Artificial Intelligence & Machine Learning at Dr. B.B. Hegde First Grade College, Kundapura. I strongly believe the best way to master new technology frameworks is to build real systems.",
+        "Rather than memorizing abstract documentation, I spend my time designing interactive web applications, configuring localized hardware layers, and exploring data science modeling tools."
+      ];
+
   return (
     <section id="about" className="py-24 px-6 md:px-12 bg-brand-bg relative">
       {/* Background decoration lines */}
@@ -45,17 +53,19 @@ export default function About() {
           <div className="lg:col-span-5 text-left">
             <SectionReveal delay={0.1}>
               <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-textPrimary mb-8 leading-tight">
-                Engineering intelligent systems by writing code and building.
+                {goal}
               </h2>
             </SectionReveal>
 
             <SectionReveal delay={0.2}>
-              <p className="text-brand-textSecondary text-sm md:text-base leading-relaxed mb-6">
-                I am Bharath Kulal, a BCA student specializing in Artificial Intelligence & Machine Learning at Dr. B.B. Hegde First Grade College, Kundapura. I strongly believe the best way to master new technology frameworks is to build real systems.
-              </p>
-              <p className="text-brand-textSecondary text-sm md:text-base leading-relaxed">
-                Rather than memorizing abstract documentation, I spend my time designing interactive web applications, configuring localized hardware layers, and exploring data science modeling tools.
-              </p>
+              {bioParagraphs.map((para, idx) => (
+                <p 
+                  key={idx} 
+                  className={`text-brand-textSecondary text-sm md:text-base leading-relaxed ${idx < bioParagraphs.length - 1 ? 'mb-6' : ''}`}
+                >
+                  {para}
+                </p>
+              ))}
             </SectionReveal>
           </div>
 

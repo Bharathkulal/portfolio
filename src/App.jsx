@@ -22,11 +22,30 @@ import DashboardLayout from './admin/DashboardLayout';
 function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [dynProjects, setDynProjects] = useState([]);
+  const [aboutInfo, setAboutInfo] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // Fetch dynamic projects from server, fall back to local mock data if offline
+  // Fetch dynamic content from server, fall back to local mock data if offline
   React.useEffect(() => {
-    const loadProjects = async () => {
+    const loadData = async () => {
+      // 1. Fetch About Info
+      try {
+        const aboutRes = await fetch(
+          window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+            ? 'http://localhost:8000/api/about'
+            : 'https://bharath-portfolio-backend.onrender.com/api/about'
+        );
+        if (aboutRes.ok) {
+          const aboutData = await aboutRes.json();
+          if (aboutData) {
+            setAboutInfo(aboutData);
+          }
+        }
+      } catch (error) {
+        console.warn('Backend offline or failed to fetch about info, using fallback.');
+      }
+
+      // 2. Fetch Projects
       try {
         const res = await fetch(
           window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
@@ -47,7 +66,7 @@ function PublicPortfolio() {
       setDynProjects(projectsData);
       setLoading(false);
     };
-    loadProjects();
+    loadData();
   }, []);
 
   return (
@@ -61,10 +80,10 @@ function PublicPortfolio() {
       {/* Single-Page Story Sections */}
       <main>
         {/* 01. Hero Intro */}
-        <Hero />
+        <Hero aboutInfo={aboutInfo} />
 
         {/* 02. About Narrative */}
-        <About />
+        <About aboutInfo={aboutInfo} />
 
         {/* 03. Capabilities Grid */}
         <Skills />

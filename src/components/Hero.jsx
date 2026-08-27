@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { ArrowRight, Terminal } from 'lucide-react';
 import TypingText from './TypingText';
 
-export default function Hero() {
+export default function Hero({ aboutInfo }) {
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,6 +33,11 @@ export default function Hero() {
       transition: { duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.3 }
     }
   };
+
+  const name = aboutInfo?.name || 'Bharath Kulal';
+  const subtitle = aboutInfo?.education || 'AI / ML Developer · Full-Stack Builder';
+  const introduction = aboutInfo?.shortIntro || 'I build with AI, solve real-world problems, and create modern digital experiences.';
+  const profilePic = aboutInfo?.profileImage || '/images/profile.jpg';
 
   return (
     <section 
@@ -73,18 +78,18 @@ export default function Hero() {
             variants={itemVariants}
             className="font-serif text-5xl md:text-7xl font-bold tracking-tight text-brand-textPrimary mb-4"
           >
-            Bharath Kulal
+            {name}
           </motion.h1>
 
           <motion.div 
             variants={itemVariants}
             className="font-mono text-sm md:text-base text-brand-accent font-medium mb-6 tracking-wide"
           >
-            AI / ML Developer · Full-Stack Builder
+            {subtitle}
           </motion.div>
 
           <TypingText 
-            text="I build with AI, solve real-world problems, and create modern digital experiences."
+            text={introduction}
             className="font-sans text-base md:text-lg text-brand-textSecondary leading-relaxed max-w-xl mb-10 font-normal"
           />
 
@@ -129,8 +134,8 @@ export default function Hero() {
           className="absolute inset-0 w-full h-full overflow-hidden group"
         >
           <img 
-            src="/images/profile.jpg" 
-            alt="Bharath Kulal" 
+            src={profilePic} 
+            alt={name} 
             className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
           />
           {/* Subtle gradient overlay to blend picture with background on left/bottom edges */}
