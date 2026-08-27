@@ -44,7 +44,7 @@ export default function About() {
           {/* Left Narrative Column */}
           <div className="lg:col-span-5 text-left">
             <SectionReveal delay={0.1}>
-              <h2 className="text-3xl md:text-4xl font-bold text-brand-textPrimary mb-8 leading-tight">
+              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-textPrimary mb-8 leading-tight">
                 Engineering intelligent systems by writing code and building.
               </h2>
             </SectionReveal>

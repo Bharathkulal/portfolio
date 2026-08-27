@@ -47,7 +47,7 @@ export default function AISection() {
               <span className="font-mono text-[10px] text-brand-blue tracking-widest uppercase block mb-3">
                 ROADMAP // ENGINEERING FOCUS
               </span>
-              <h2 className="text-3xl md:text-4xl font-extrabold text-brand-textPrimary mb-6 leading-tight">
+              <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-brand-textPrimary mb-6 leading-tight">
                 AI is not a keyword. It is a direction.
               </h2>
               <p className="text-brand-textSecondary text-sm leading-relaxed mb-8">

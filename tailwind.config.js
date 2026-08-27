@@ -8,7 +8,8 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
-        mono: ['JetBrains Mono', 'monospace'],
+        mono: ['IBM Plex Mono', 'monospace'],
+        serif: ['Source Serif 4', 'Cormorant Garamond', 'Georgia', 'serif'],
       },
       colors: {
         brand: {

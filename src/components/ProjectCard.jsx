@@ -53,7 +53,7 @@ export default function ProjectCard({ project, onClick }) {
           <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase block mb-1">
             PROJECT // MODULE
           </span>
-          <h3 className="text-2xl font-bold text-brand-textPrimary group-hover:text-brand-accent transition-colors">
+          <h3 className="font-serif text-2xl font-bold text-brand-textPrimary group-hover:text-brand-accent transition-colors">
             {project.name}
           </h3>
         </div>

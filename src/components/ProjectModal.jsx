@@ -179,7 +179,7 @@ export default function ProjectModal({ project, onClose }) {
 
           {/* Scrollable details view */}
           <div className="flex-grow overflow-y-auto px-6 md:px-8 py-6 text-left">
-            <h2 className="text-3xl font-extrabold text-brand-textPrimary mb-2">
+            <h2 className="font-serif text-3xl font-extrabold text-brand-textPrimary mb-2">
               {project.name}
             </h2>
             <p className="text-brand-textSecondary text-sm mb-8 max-w-2xl leading-relaxed">

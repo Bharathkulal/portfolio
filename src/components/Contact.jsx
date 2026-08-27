@@ -45,7 +45,7 @@ export default function Contact() {
           {/* Left Connect Anchors Column */}
           <div className="lg:col-span-5">
             <SectionReveal delay={0.1}>
-              <h2 className="text-3xl md:text-5xl font-extrabold text-brand-textPrimary mb-6 tracking-tight leading-none">
+              <h2 className="font-serif text-3xl md:text-5xl font-extrabold text-brand-textPrimary mb-6 tracking-tight leading-none">
                 HAVE AN IDEA WORTH BUILDING?
               </h2>
               <p className="text-brand-textSecondary text-xs md:text-sm leading-relaxed mb-8 max-w-sm">

@@ -63,7 +63,7 @@ export default function Hero() {
           {/* Small intro text */}
           <motion.p 
             variants={itemVariants}
-            className="font-mono text-xs md:text-sm text-brand-textSecondary mb-2 tracking-wider"
+            className="font-sans text-xs md:text-sm text-brand-textSecondary/80 mb-2 tracking-wide font-medium"
           >
             Hey, I’m
           </motion.p>
@@ -71,21 +71,21 @@ export default function Hero() {
           {/* Name & Titles */}
           <motion.h1 
             variants={itemVariants}
-            className="font-sans text-5xl md:text-7xl font-extrabold tracking-tight text-brand-textPrimary mb-4"
+            className="font-serif text-5xl md:text-7xl font-bold tracking-tight text-brand-textPrimary mb-4"
           >
             Bharath Kulal
           </motion.h1>
 
           <motion.div 
             variants={itemVariants}
-            className="font-mono text-sm md:text-base text-brand-accent font-medium mb-6"
+            className="font-mono text-sm md:text-base text-brand-accent font-medium mb-6 tracking-wide"
           >
             AI / ML Developer · Full-Stack Builder
           </motion.div>
 
           <TypingText 
             text="I build with AI, solve real-world problems, and create modern digital experiences."
-            className="text-base md:text-lg text-brand-textSecondary max-w-xl mb-10 font-light"
+            className="font-sans text-base md:text-lg text-brand-textSecondary leading-relaxed max-w-xl mb-10 font-normal"
           />
 
           {/* Call to Actions */}
