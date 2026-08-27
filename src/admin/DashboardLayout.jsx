@@ -97,7 +97,7 @@ export default function DashboardLayout() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-brand-textPrimary font-sans flex relative overflow-hidden">
+    <div className="theme-light-admin min-h-screen bg-brand-bg text-brand-textPrimary font-sans flex relative overflow-hidden">
       {/* Background radial highlight */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[140px] pointer-events-none -z-10" />
 
