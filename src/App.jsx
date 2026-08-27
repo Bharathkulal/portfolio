@@ -19,24 +19,6 @@ import { ThemeProvider, useTheme } from './context/ThemeContext';
 import Login from './admin/Login';
 import DashboardLayout from './admin/DashboardLayout';
 
-function ThemeDebug() {
-  const { theme } = useTheme();
-  const [bgVal, setBgVal] = React.useState('');
-
-  React.useEffect(() => {
-    const timer = setTimeout(() => {
-      setBgVal(getComputedStyle(document.documentElement).getPropertyValue('--bg'));
-    }, 100);
-    return () => clearTimeout(timer);
-  }, [theme]);
-
-  return (
-    <div className="fixed bottom-4 left-4 bg-black/80 border border-brand-border text-brand-textPrimary p-4 rounded-xl z-50 text-xs font-mono">
-      THEME: {theme} | ATTR: {document.documentElement.getAttribute('data-theme')} | BG: {bgVal}
-    </div>
-  );
-}
-
 function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [dynProjects, setDynProjects] = useState([]);
@@ -164,7 +146,6 @@ function PublicPortfolio() {
 export default function App() {
   return (
     <ThemeProvider>
-      <ThemeDebug />
       <BrowserRouter>
         <Routes>
           <Route path="/admin/login" element={<Login />} />
