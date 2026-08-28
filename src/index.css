@@ -6,9 +6,9 @@
 
 /* Default Light Theme variables (Premium white editorial style) */
 :root {
-  --bg: #f7f7f5;
+  --bg: #f2ead5;
   --surface: #ffffff;
-  --surface-2: #f1f2f0;
+  --surface-2: #e3d7bb;
   --text: #111111;
   --muted: #5f6368;
   --border: rgba(0, 0, 0, 0.10);

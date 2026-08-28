@@ -2,8 +2,10 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight, Terminal } from 'lucide-react';
 import TypingText from './TypingText';
+import { useTheme } from '../context/ThemeContext';
 
 export default function Hero({ aboutInfo }) {
+  const { theme } = useTheme();
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -37,7 +39,9 @@ export default function Hero({ aboutInfo }) {
   const name = aboutInfo?.name || 'Bharath Kulal';
   const subtitle = aboutInfo?.education || 'AI / ML Developer · Full-Stack Builder';
   const introduction = aboutInfo?.shortIntro || 'I build with AI, solve real-world problems, and create modern digital experiences.';
-  const profilePic = aboutInfo?.profileImage || '/images/profile.jpg';
+  const profilePic = theme === 'dark' 
+    ? (aboutInfo?.profileImage || '/images/profile.jpg') 
+    : '/images/profile-light.jpg';
 
   return (
     <section 
