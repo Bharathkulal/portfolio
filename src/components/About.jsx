@@ -1,92 +1,157 @@
 import React from 'react';
-import SectionReveal from './SectionReveal';
-import { Target, Cpu, Layers, Sparkles } from 'lucide-react';
-
-const directions = [
-  {
-    icon: <Cpu className="text-brand-accent" size={20} />,
-    title: "AI/ML Engineer",
-    desc: "Targeting predictive logic, model fine-tuning processes, and predictive analytics data flows."
-  },
-  {
-    icon: <Layers className="text-brand-blue" size={20} />,
-    title: "Full-Stack Developer",
-    desc: "Binding robust user interfaces with reliable, well-documented backend utility logic."
-  },
-  {
-    icon: <Sparkles className="text-brand-accent" size={20} />,
-    title: "AI Application Developer",
-    desc: "Constructing developer utility interfaces powered by large language models."
-  },
-  {
-    icon: <Target className="text-brand-blue" size={20} />,
-    title: "Software Developer",
-    desc: "Writing efficient, portable desktop applications and native scripts."
-  }
-];
+import { motion } from 'framer-motion';
+import { useTheme } from '../context/ThemeContext';
+import { Brain, Database, Hammer, Sparkles } from 'lucide-react';
 
 export default function About({ aboutInfo }) {
-  const goal = aboutInfo?.goal || "Engineering intelligent systems by writing code and building.";
-  const bioParagraphs = aboutInfo?.bio 
-    ? aboutInfo.bio.split(/\n\n+/).filter(Boolean)
-    : [
-        "I am Bharath Kulal, a BCA student specializing in Artificial Intelligence & Machine Learning at Dr. B.B. Hegde First Grade College, Kundapura. I strongly believe the best way to master new technology frameworks is to build real systems.",
-        "Rather than memorizing abstract documentation, I spend my time designing interactive web applications, configuring localized hardware layers, and exploring data science modeling tools."
-      ];
+  const { theme } = useTheme();
+
+  const profilePic = theme === 'dark' 
+    ? (aboutInfo?.profileImage || '/images/profile.jpg') 
+    : '/images/profile-light.jpg';
+
+  const goal = "Turning Ideas Into Intelligent Solutions.";
+  const bioText = aboutInfo?.bio || "I am a BCA student specializing in Artificial Intelligence & Machine Learning. I am deeply passionate about bridging the gap between intelligent algorithms and user-facing applications. By combining full-stack development expertise with modern AI/ML frameworks, I design and build robust, automated systems that solve real-world problems.";
+
+  // Framer Motion Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.7, ease: [0.215, 0.61, 0.355, 1] }
+    }
+  };
+
+  const imageVariants = {
+    hidden: { opacity: 0, scale: 0.96 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8, ease: 'easeOut' }
+    }
+  };
+
+  const cardsData = [
+    {
+      icon: <Brain className="text-brand-accent" size={18} />,
+      title: "AI / ML",
+      description: "Machine Learning • Generative AI • Computer Vision"
+    },
+    {
+      icon: <Database className="text-brand-blue" size={18} />,
+      title: "Full Stack",
+      description: "React • Node.js • Python • APIs"
+    },
+    {
+      icon: <Hammer className="text-brand-accent" size={18} />,
+      title: "Builder Mindset",
+      description: "Projects • Problem Solving • Continuous Learning"
+    }
+  ];
 
   return (
-    <section id="about" className="py-24 px-6 md:px-12 bg-brand-bg relative">
-      {/* Background decoration lines */}
-      <div className="absolute top-0 left-1/4 w-px h-full bg-brand-border/10 pointer-events-none" />
-
+    <section id="about" className="py-28 px-6 md:px-12 bg-brand-bg relative transition-colors duration-300">
       <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
-        <SectionReveal>
-          <div className="flex items-center gap-4 mb-16">
-            <span className="font-mono text-xs text-brand-accent">01 — ABOUT</span>
-            <div className="h-px flex-grow bg-brand-border/50" />
+        <motion.div 
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+          className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
+        >
+          {/* Left Column: Portrait image with badges */}
+          <div className="lg:col-span-5 flex flex-col items-center lg:items-start justify-center">
+            <motion.div 
+              variants={imageVariants}
+              className="relative w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border bg-brand-tertiary/20 shadow-md group"
+            >
+              <img 
+                src={profilePic} 
+                alt="Bharath Kulal" 
+                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+              
+              {/* Floating top badge */}
+              <div className="absolute top-4 left-4 bg-brand-card/90 backdrop-blur-sm border border-brand-border/60 rounded-full px-3 py-1 flex items-center gap-1.5 shadow-sm">
+                <Sparkles size={11} className="text-brand-accent animate-pulse" />
+                <span className="font-mono text-[9px] tracking-wider text-brand-textPrimary font-bold">
+                  AI / ML DEVELOPER
+                </span>
+              </div>
+
+              {/* Status indicator bottom banner */}
+              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-5 pt-10 flex flex-col gap-1 items-center justify-center">
+                <div className="flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping" />
+                  <span className="font-mono text-[10px] text-white tracking-widest uppercase">
+                    Building • Learning • Creating
+                  </span>
+                </div>
+              </div>
+            </motion.div>
           </div>
-        </SectionReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Narrative Column */}
-          <div className="lg:col-span-5 text-left">
-            <SectionReveal delay={0.1}>
-              <h2 className="font-serif text-3xl md:text-4xl font-bold text-brand-textPrimary mb-8 leading-tight">
-                {goal}
-              </h2>
-            </SectionReveal>
+          {/* Right Column: Bio and Cards */}
+          <div className="lg:col-span-7 text-left flex flex-col justify-center">
+            {/* Eyebrow */}
+            <motion.span 
+              variants={itemVariants}
+              className="font-mono text-xs text-brand-accent tracking-widest uppercase font-semibold block mb-3"
+            >
+              ABOUT ME
+            </motion.span>
 
-            <SectionReveal delay={0.2}>
-              {bioParagraphs.map((para, idx) => (
-                <p 
-                  key={idx} 
-                  className={`text-brand-textSecondary text-sm md:text-base leading-relaxed ${idx < bioParagraphs.length - 1 ? 'mb-6' : ''}`}
+            {/* Title */}
+            <motion.h2 
+              variants={itemVariants}
+              className="font-serif text-4xl md:text-5xl font-bold text-brand-textPrimary mb-6 leading-tight tracking-tight"
+            >
+              {goal}
+            </motion.h2>
+
+            {/* Bio Paragraph */}
+            <motion.p 
+              variants={itemVariants}
+              className="font-sans text-sm md:text-base text-brand-textSecondary leading-relaxed mb-8 max-w-2xl font-normal"
+            >
+              {bioText}
+            </motion.p>
+
+            {/* Information Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full">
+              {cardsData.map((card, index) => (
+                <motion.div 
+                  key={card.title}
+                  variants={itemVariants}
+                  whileHover={{ y: -4, shadow: 'md' }}
+                  className="p-5 bg-brand-card border border-brand-border/80 dark:border-brand-border/40 rounded-xl flex flex-col items-start text-left transition-all duration-300 group shadow-sm hover:border-brand-accent/50 cursor-default"
                 >
-                  {para}
-                </p>
-              ))}
-            </SectionReveal>
-          </div>
-
-          {/* Right Direction Cards Column */}
-          <div className="lg:col-span-7">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {directions.map((dir, idx) => (
-                <SectionReveal key={dir.title} delay={0.1 + idx * 0.08}>
-                  <div className="p-6 bg-brand-card/40 border border-brand-border/60 rounded-2xl text-left hover:border-brand-accent/40 transition-colors group">
-                    <div className="w-10 h-10 rounded-xl bg-brand-tertiary flex items-center justify-center mb-5 group-hover:scale-105 transition-transform">
-                      {dir.icon}
-                    </div>
-                    <h3 className="font-sans font-semibold text-brand-textPrimary text-base mb-2">{dir.title}</h3>
-                    <p className="text-brand-textSecondary text-xs leading-relaxed">{dir.desc}</p>
+                  <div className="w-8 h-8 rounded-lg bg-brand-tertiary flex items-center justify-center mb-4 transition-colors group-hover:bg-brand-accent/10">
+                    {card.icon}
                   </div>
-                </SectionReveal>
+                  <h3 className="font-sans font-bold text-brand-textPrimary text-sm mb-2">
+                    {card.title}
+                  </h3>
+                  <p className="font-sans text-[11px] leading-relaxed text-brand-textSecondary">
+                    {card.description}
+                  </p>
+                </motion.div>
               ))}
             </div>
           </div>
-
-        </div>
+        </motion.div>
       </div>
     </section>
   );

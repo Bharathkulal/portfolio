@@ -285,18 +285,18 @@ export default function Skills() {
                     setHoveredTech(null);
                     setIsHoveringAny(false);
                   }}
-                  className={`pointer-events-auto flex items-center gap-3.5 bg-brand-card/75 border rounded-xl h-[56px] px-5 transition-all duration-300 group/card cursor-pointer ${depthOpacity} ${
+                  className={`pointer-events-auto flex items-center gap-3.5 bg-brand-card border rounded-xl h-[56px] px-5 transition-all duration-300 group/card cursor-pointer shadow-sm ${depthOpacity} ${
                     isHovered 
-                      ? 'border-brand-accent/60 shadow-[0_0_15px_-2px_rgba(0,255,136,0.15)] bg-brand-card/90 opacity-100 scale-105' 
+                      ? 'border-brand-accent shadow-[0_0_20px_-2px_rgba(0,255,136,0.25)] bg-brand-card opacity-100 scale-105' 
                       : isDimmed 
                         ? 'opacity-40 border-brand-border/20' 
-                        : 'border-brand-border/40 hover:border-brand-accent/30'
+                        : 'border-brand-border/80 dark:border-brand-border/40 hover:border-brand-accent/60'
                   }`}
                 >
-                  <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-tertiary/45 border border-brand-border/30 group-hover/card:scale-105 transition-transform duration-300 text-brand-textSecondary group-hover/card:text-brand-accent">
+                  <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-tertiary border border-brand-border/50 group-hover/card:scale-105 transition-transform duration-300 text-brand-textSecondary group-hover/card:text-brand-accent">
                     {getTechIcon(item.name)}
                   </div>
-                  <span className="font-sans font-medium text-xs text-brand-textSecondary group-hover/card:text-brand-textPrimary transition-colors duration-300">
+                  <span className="font-sans font-semibold text-xs text-brand-textPrimary dark:text-brand-textSecondary group-hover/card:text-brand-accent transition-colors duration-300">
                     {item.name}
                   </span>
 
@@ -357,8 +357,8 @@ export default function Skills() {
         <div className="relative flex items-center justify-center w-[720px] h-[720px] scale-[0.45] xs:scale-[0.55] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 transition-transform duration-500">
           
           {/* Central AI/ML core with dynamic text dashboard */}
-          <div className="absolute w-44 h-44 rounded-full bg-brand-card/95 border-2 border-brand-accent/30 shadow-[0_0_35px_rgba(0,255,136,0.06)] z-50 flex flex-col justify-center items-center text-center p-4">
-            <div className="absolute inset-0 bg-brand-accent/5 rounded-full blur-xl animate-pulse pointer-events-none" />
+          <div className="absolute w-44 h-44 rounded-full bg-brand-card border-2 border-brand-accent/50 shadow-[0_0_35px_rgba(0,255,136,0.15)] z-50 flex flex-col justify-center items-center text-center p-4">
+            <div className="absolute inset-0 bg-brand-accent/10 rounded-full blur-xl animate-pulse pointer-events-none" />
             
             {activeTechDetails ? (
               <motion.div 
@@ -366,13 +366,13 @@ export default function Skills() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="z-10 font-sans"
               >
-                <span className="font-mono text-[9px] tracking-widest text-brand-accent block mb-1">
+                <span className="font-mono text-[9px] tracking-widest text-brand-accent block mb-1 font-bold">
                   {activeTechDetails.catNum} // {activeTechDetails.catName.toUpperCase()}
                 </span>
                 <span className="text-lg font-bold text-brand-textPrimary block truncate max-w-[130px]">
                   {activeTechDetails.name}
                 </span>
-                <span className="font-mono text-[8px] text-brand-textSecondary block mt-1 tracking-wide animate-pulse">
+                <span className="font-mono text-[8px] text-brand-textPrimary dark:text-brand-textSecondary block mt-1 tracking-wide animate-pulse font-semibold">
                   SYSTEM_FOCUSED
                 </span>
               </motion.div>
@@ -381,7 +381,7 @@ export default function Skills() {
                 <span className="text-xl font-bold tracking-wider text-brand-accent block">
                   AI / ML
                 </span>
-                <span className="font-mono text-[9px] text-brand-textSecondary tracking-widest uppercase block mt-1">
+                <span className="font-mono text-[10px] text-brand-textPrimary dark:text-brand-textSecondary tracking-widest uppercase block mt-1 font-bold">
                   BHARATH KULAL
                 </span>
               </div>
@@ -389,11 +389,11 @@ export default function Skills() {
           </div>
 
           {/* SVG Orbit Tracks Background */}
-          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-45">
+          <svg className="absolute inset-0 w-full h-full pointer-events-none z-10 opacity-70">
             {/* Connection Radial Lines */}
-            <circle cx="360" cy="360" r="140" fill="none" stroke="var(--border)" strokeWidth="1" strokeDasharray="3 6" />
-            <circle cx="360" cy="360" r="230" fill="none" stroke="var(--border)" strokeWidth="1.2" strokeDasharray="4 8" />
-            <circle cx="360" cy="360" r="320" fill="none" stroke="var(--border)" strokeWidth="1" strokeDasharray="3 6" />
+            <circle cx="360" cy="360" r="140" fill="none" stroke="var(--text)" strokeWidth="1" strokeDasharray="3 6" className="opacity-25 dark:opacity-35" />
+            <circle cx="360" cy="360" r="230" fill="none" stroke="var(--text)" strokeWidth="1.2" strokeDasharray="4 8" className="opacity-30 dark:opacity-40" />
+            <circle cx="360" cy="360" r="320" fill="none" stroke="var(--text)" strokeWidth="1" strokeDasharray="3 6" className="opacity-25 dark:opacity-35" />
           </svg>
 
           {/* Ring 1 (Inner): AI / ML technologies (Radius: 140px, rotates clockwise) */}
