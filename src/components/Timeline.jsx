@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import SectionReveal from './SectionReveal';
 import { educationData } from '../data/portfolioData';
 import { GraduationCap, Calendar } from 'lucide-react';
@@ -31,14 +32,18 @@ export default function Timeline() {
                   }`}></span>
                 </div>
 
-                <div className="p-6 md:p-8 bg-brand-card/30 border border-brand-border/60 hover:border-brand-border rounded-3xl transition-colors">
+                <motion.div 
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="p-6 md:p-8 bg-brand-card/40 border border-brand-border/60 hover:border-brand-accent/40 rounded-3xl transition-all shadow-sm cursor-default"
+                >
                   <div className="flex flex-wrap items-center justify-between gap-3 mb-4">
                     <div className="flex items-center gap-2 font-mono text-[10px] text-brand-blue uppercase tracking-wider">
                       <Calendar size={12} />
                       <span>{item.period}</span>
                     </div>
                     {idx === 0 && (
-                      <span className="font-mono text-[9px] bg-brand-accent/5 border border-brand-accent/30 text-brand-accent px-2 py-0.5 rounded uppercase">
+                      <span className="font-mono text-[9px] bg-brand-accent/10 border border-brand-accent/30 text-brand-accent px-2 py-0.5 rounded-full uppercase font-semibold">
                         ACTIVE_ENROLLMENT
                       </span>
                     )}
@@ -53,10 +58,10 @@ export default function Timeline() {
                     {item.institution}
                   </p>
 
-                  <p className="text-brand-textSecondary text-xs md:text-sm leading-relaxed font-light">
+                  <p className="text-brand-textSecondary text-xs md:text-sm leading-relaxed font-normal">
                     {item.description}
                   </p>
-                </div>
+                </motion.div>
               </div>
             </SectionReveal>
           ))}

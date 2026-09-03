@@ -12,18 +12,18 @@ export default function Hero({ aboutInfo }) {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.12,
-        delayChildren: 0.2
+        staggerChildren: 0.08,
+        delayChildren: 0.1
       }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 18 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.215, 0.61, 0.355, 1] }
+      transition: { duration: 0.6, ease: [0.215, 0.61, 0.355, 1] }
     }
   };
 
@@ -32,7 +32,7 @@ export default function Hero({ aboutInfo }) {
     visible: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 1.5, ease: [0.25, 1, 0.5, 1], delay: 0.3 }
+      transition: { duration: 0.9, ease: [0.215, 0.61, 0.355, 1], delay: 0.15 }
     }
   };
 
@@ -53,7 +53,7 @@ export default function Hero({ aboutInfo }) {
       <div className="absolute bottom-[20%] right-[15%] w-[400px] h-[400px] bg-brand-blue/5 rounded-full blur-[140px] pointer-events-none" />
 
       {/* Left Column: Text Content */}
-      <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left px-6 sm:px-12 lg:px-20 py-32 lg:py-12 z-10 relative">
+      <div className="w-full lg:w-1/2 flex flex-col justify-center items-start text-left px-6 sm:px-12 lg:px-20 pt-28 pb-16 lg:py-12 z-10 relative">
         <motion.div 
           variants={containerVariants}
           initial="hidden"
@@ -63,9 +63,9 @@ export default function Hero({ aboutInfo }) {
           {/* Technical Tag */}
           <motion.div 
             variants={itemVariants}
-            className="flex items-center gap-2 border border-brand-border bg-brand-card px-3.5 py-1.5 rounded-full mb-6"
+            className="flex items-center gap-2 border border-brand-border bg-brand-card px-3.5 py-1.5 rounded-full mb-6 shadow-sm"
           >
-            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse"></span>
+            <span className="w-2 h-2 rounded-full bg-brand-accent animate-pulse shadow-[0_0_8px_rgba(0,255,136,0.6)]"></span>
             <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase">SYSTEM_INIT // B.KULAL_PORTFOLIO</span>
           </motion.div>
 
@@ -102,35 +102,39 @@ export default function Hero({ aboutInfo }) {
             variants={itemVariants}
             className="flex flex-wrap gap-4"
           >
-            <a 
+            <motion.a 
               href="#projects" 
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.02 }}
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="group flex items-center gap-2 bg-brand-accent text-brand-bg px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-brand-accent/15"
+              className="group flex items-center gap-2 bg-brand-accent text-brand-bg px-7 py-3.5 rounded-full font-medium text-sm transition-all duration-300 hover:bg-white hover:shadow-lg hover:shadow-brand-accent/20 cursor-pointer"
             >
               Explore My Work 
-              <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-            </a>
+              <ArrowRight size={16} className="group-hover:translate-x-1.5 transition-transform" />
+            </motion.a>
 
-            <a 
+            <motion.a 
               href="#contact"
+              whileTap={{ scale: 0.96 }}
+              whileHover={{ scale: 1.02 }}
               onClick={(e) => {
                 e.preventDefault();
                 document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
               }}
-              className="flex items-center gap-2 border border-brand-border bg-brand-card/60 hover:bg-brand-tertiary text-brand-textPrimary hover:border-brand-textSecondary px-7 py-3.5 rounded-full font-medium text-sm transition-all"
+              className="flex items-center gap-2 border border-brand-border bg-brand-card/70 hover:bg-brand-tertiary text-brand-textPrimary hover:border-brand-accent/40 px-7 py-3.5 rounded-full font-medium text-sm transition-all cursor-pointer"
             >
               Get In Touch 
-              <Terminal size={14} className="text-brand-textSecondary" />
-            </a>
+              <Terminal size={14} className="text-brand-accent" />
+            </motion.a>
           </motion.div>
         </motion.div>
       </div>
 
       {/* Right Column: Visual Frame */}
-      <div className="w-full lg:w-1/2 relative min-h-[50vh] lg:min-h-0 h-auto lg:h-screen z-10">
+      <div className="w-full lg:w-1/2 relative min-h-[45vh] lg:min-h-0 h-auto lg:h-screen z-10">
         <motion.div 
           variants={imageVariants}
           initial="hidden"

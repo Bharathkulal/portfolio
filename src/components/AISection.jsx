@@ -80,7 +80,11 @@ export default function AISection() {
                       <span className="w-1.5 h-1.5 rounded-full bg-brand-textSecondary group-hover:bg-brand-accent transition-colors"></span>
                     </div>
 
-                    <div className="p-5 bg-brand-card/20 border border-brand-border/40 hover:border-brand-blue/30 rounded-2xl transition-all">
+                    <motion.div 
+                      whileHover={{ x: 4 }}
+                      whileTap={{ scale: 0.98 }}
+                      className="p-5 bg-brand-card/40 border border-brand-border/60 hover:border-brand-accent/40 rounded-2xl transition-all shadow-sm cursor-default"
+                    >
                       <div className="flex items-center gap-3 mb-3">
                         {block.icon}
                         <h3 className="font-sans font-bold text-brand-textPrimary text-sm md:text-base">
@@ -90,7 +94,7 @@ export default function AISection() {
                       <p className="text-brand-textSecondary text-xs leading-relaxed pl-8">
                         {block.desc}
                       </p>
-                    </div>
+                    </motion.div>
                   </div>
                 </SectionReveal>
               ))}

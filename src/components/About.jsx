@@ -164,6 +164,7 @@ export default function About({ aboutInfo }) {
                   key={card.title}
                   variants={itemVariants}
                   whileHover={{ y: -4, shadow: 'md' }}
+                  whileTap={{ scale: 0.98 }}
                   className="p-5 bg-brand-card border border-brand-border/80 dark:border-brand-border/40 rounded-xl flex flex-col items-start text-left transition-all duration-300 group shadow-sm hover:border-brand-accent/50 cursor-default"
                 >
                   <div className="w-8 h-8 rounded-lg bg-brand-tertiary flex items-center justify-center mb-4 transition-colors group-hover:bg-brand-accent/10">

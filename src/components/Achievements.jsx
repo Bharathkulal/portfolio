@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import SectionReveal from './SectionReveal';
 import { activitiesData } from '../data/portfolioData';
 import { Award, Layers, Trophy } from 'lucide-react';
@@ -51,12 +52,17 @@ export default function Achievements() {
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 {activitiesData.competitions.map((comp, idx) => (
-                  <div key={idx} className="p-4 bg-brand-tertiary/60 border border-brand-border/40 rounded-xl flex items-center gap-3">
-                    <div className="w-6 h-6 rounded bg-brand-blue/5 border border-brand-blue/20 flex items-center justify-center text-[10px] font-mono text-brand-blue font-bold">
+                  <motion.div 
+                    key={idx} 
+                    whileHover={{ y: -2 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="p-4 bg-brand-tertiary/60 border border-brand-border/40 hover:border-brand-blue/40 rounded-xl flex items-center gap-3 transition-colors cursor-default"
+                  >
+                    <div className="w-6 h-6 rounded bg-brand-blue/10 border border-brand-blue/30 flex items-center justify-center text-[10px] font-mono text-brand-blue font-bold">
                       {idx + 1}
                     </div>
                     <span className="text-xs text-brand-textPrimary font-medium">{comp}</span>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </div>

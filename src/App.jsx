@@ -78,7 +78,7 @@ function PublicPortfolio() {
       <Navigation />
 
       {/* Single-Page Story Sections */}
-      <main>
+      <main className="pb-24 md:pb-12">
         {/* 01. Hero Intro */}
         <Hero aboutInfo={aboutInfo} />
 
@@ -104,10 +104,11 @@ function PublicPortfolio() {
                   Loading work portfolio...
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {dynProjects.map((project) => (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+                  {dynProjects.map((project, index) => (
                     <ProjectCard 
                       key={project._id || project.id} 
+                      index={index}
                       project={{
                         ...project,
                         id: project._id || project.id,
