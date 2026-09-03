@@ -1,15 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
-import { Brain, Database, Hammer, Sparkles } from 'lucide-react';
+import { Brain, Database, Hammer, Sparkles, Terminal } from 'lucide-react';
 
 export default function About({ aboutInfo }) {
-  const { theme } = useTheme();
-
-  const profilePic = theme === 'dark' 
-    ? (aboutInfo?.profileImage || '/images/profile.jpg') 
-    : '/images/profile-light.jpg';
-
   const goal = "Turning Ideas Into Intelligent Solutions.";
   const bioText = aboutInfo?.bio || "I am a BCA student specializing in Artificial Intelligence & Machine Learning. I am deeply passionate about bridging the gap between intelligent algorithms and user-facing applications. By combining full-stack development expertise with modern AI/ML frameworks, I design and build robust, automated systems that solve real-world problems.";
 
@@ -71,34 +64,69 @@ export default function About({ aboutInfo }) {
           viewport={{ once: true, margin: "-100px" }}
           className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center"
         >
-          {/* Left Column: Portrait image with badges */}
+          {/* Left Column: Technical Terminal Card with badges */}
           <div className="lg:col-span-5 flex flex-col items-center lg:items-start justify-center">
             <motion.div 
               variants={imageVariants}
-              className="relative w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border bg-brand-tertiary/20 shadow-md group"
+              className="relative w-full max-w-[380px] aspect-[4/5] rounded-2xl overflow-hidden border border-brand-border/80 dark:border-brand-border/40 bg-brand-card shadow-lg flex flex-col justify-between p-5 sm:p-6 group transition-all duration-300 hover:border-brand-accent/40"
             >
-              <img 
-                src={profilePic} 
-                alt="Bharath Kulal" 
-                className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-              
-              {/* Floating top badge */}
-              <div className="absolute top-4 left-4 bg-brand-card/90 backdrop-blur-sm border border-brand-border/60 rounded-full px-3 py-1 flex items-center gap-1.5 shadow-sm">
-                <Sparkles size={11} className="text-brand-accent animate-pulse" />
-                <span className="font-mono text-[9px] tracking-wider text-brand-textPrimary font-bold">
-                  AI / ML DEVELOPER
-                </span>
+              {/* Ambient Glows & Tech Grid Background */}
+              <div className="absolute inset-0 tech-grid-bg opacity-30 pointer-events-none" />
+              <div className="absolute -top-10 -right-10 w-40 h-40 bg-brand-accent/10 rounded-full blur-3xl pointer-events-none" />
+              <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-brand-blue/10 rounded-full blur-3xl pointer-events-none" />
+
+              {/* Floating top header badge */}
+              <div className="relative z-10 flex items-center justify-between w-full">
+                <div className="bg-brand-tertiary/90 backdrop-blur-sm border border-brand-border/60 rounded-full px-3 py-1 flex items-center gap-1.5 shadow-sm">
+                  <Sparkles size={11} className="text-brand-accent animate-pulse" />
+                  <span className="font-mono text-[9px] tracking-wider text-brand-textPrimary font-bold">
+                    AI / ML DEVELOPER
+                  </span>
+                </div>
+                <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-brand-accent/10 border border-brand-accent/20">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                  <span className="font-mono text-[9px] text-brand-accent font-semibold tracking-wider">LIVE</span>
+                </div>
+              </div>
+
+              {/* Center: Technical Kernel / Code Visualizer */}
+              <div className="relative z-10 my-auto w-full bg-brand-bg/95 border border-brand-border/70 rounded-xl p-4 font-mono text-left shadow-sm">
+                <div className="flex items-center justify-between border-b border-brand-border/40 pb-2.5 mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-red-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-amber-500/80" />
+                    <span className="w-2 h-2 rounded-full bg-emerald-500/80" />
+                  </div>
+                  <span className="text-[10px] text-brand-textSecondary tracking-wider font-mono">dev_kernel.py</span>
+                </div>
+
+                <div className="text-[11px] leading-relaxed space-y-1">
+                  <div className="text-brand-textSecondary/70 text-[10px]">// Neural Core Config</div>
+                  <div>
+                    <span className="text-brand-accent font-semibold">class</span> <span className="text-brand-textPrimary font-bold">BharathKulal</span>:
+                  </div>
+                  <div className="pl-3 space-y-0.5 text-brand-textSecondary">
+                    <div>role = <span className="text-brand-accent font-medium">"AI & ML Builder"</span></div>
+                    <div>stack = [<span className="text-brand-textPrimary">"PyTorch"</span>, <span className="text-brand-textPrimary">"React"</span>, <span className="text-brand-textPrimary">"Python"</span>]</div>
+                    <div>goal = <span className="text-brand-accent font-medium">"Intelligent Systems"</span></div>
+                  </div>
+                </div>
+
+                <div className="mt-3.5 pt-2.5 border-t border-brand-border/40 flex items-center justify-between text-[9px] text-brand-textSecondary">
+                  <span className="flex items-center gap-1.5 font-medium">
+                    <Terminal size={11} className="text-brand-accent" />
+                    <span>SYS_READY // V3.0</span>
+                  </span>
+                  <span className="font-mono text-brand-accent font-bold">100% OPERATIONAL</span>
+                </div>
               </div>
 
               {/* Status indicator bottom banner */}
-              <div className="absolute bottom-0 inset-x-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-5 pt-10 flex flex-col gap-1 items-center justify-center">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping" />
-                  <span className="font-mono text-[10px] text-white tracking-widest uppercase">
-                    Building • Learning • Creating
-                  </span>
-                </div>
+              <div className="relative z-10 w-full bg-brand-tertiary/90 backdrop-blur-sm border border-brand-border/60 rounded-xl py-2 px-3 flex items-center justify-center gap-2 shadow-sm">
+                <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-ping" />
+                <span className="font-mono text-[10px] text-brand-textPrimary font-semibold tracking-widest uppercase">
+                  Building • Learning • Creating
+                </span>
               </div>
             </motion.div>
           </div>
