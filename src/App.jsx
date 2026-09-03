@@ -4,7 +4,7 @@ import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
-import ProjectCard from './components/ProjectCard';
+import ProjectShowcase from './components/ProjectShowcase';
 import ProjectModal from './components/ProjectModal';
 import AISection from './components/AISection';
 import Timeline from './components/Timeline';
@@ -88,41 +88,11 @@ function PublicPortfolio() {
         {/* 03. Capabilities Grid */}
         <Skills />
 
-        {/* 04. Selected Work Modules */}
-        <section id="projects" className="py-24 px-6 md:px-12 bg-brand-bg relative">
-          <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
-            <SectionReveal>
-              <div className="flex items-center gap-4 mb-16">
-                <span className="font-mono text-xs text-brand-accent">03 — SELECTED WORK</span>
-                <div className="h-px flex-grow bg-brand-border/50" />
-              </div>
-            </SectionReveal>
-
-            <SectionReveal delay={0.1}>
-              {loading ? (
-                <div className="h-44 flex items-center justify-center font-mono text-xs text-brand-textSecondary">
-                  Loading work portfolio...
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                  {dynProjects.map((project, index) => (
-                    <ProjectCard 
-                      key={project._id || project.id} 
-                      index={index}
-                      project={{
-                        ...project,
-                        id: project._id || project.id,
-                        // support dynamic schemas that might save technologies as tags or array
-                        tags: project.technologies || project.tags || []
-                      }} 
-                      onClick={() => setSelectedProject(project)} 
-                    />
-                  ))}
-                </div>
-              )}
-            </SectionReveal>
-          </div>
-        </section>
+        {/* 04. Selected Work Modules - Infinite Continuous Stream */}
+        <ProjectShowcase 
+          projects={dynProjects} 
+          onSelectProject={setSelectedProject} 
+        />
 
         {/* 05. AI/ML Deepening */}
         <AISection />
