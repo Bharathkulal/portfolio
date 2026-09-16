@@ -158,6 +158,24 @@
   border: 1px solid var(--border);
 }
 
+/* Big typography text outline styling */
+.text-outline {
+  -webkit-text-stroke: 1.5px var(--text);
+  color: transparent;
+}
+
+.text-outline-accent {
+  -webkit-text-stroke: 1.5px var(--accent);
+  color: transparent;
+}
+
+.hero-giant-text {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  letter-spacing: -0.03em;
+  line-height: 0.85;
+  user-select: none;
+}
+
 /* Caret blinking animation keyframes */
 @keyframes caretBlink {
   0%, 100% { opacity: 1; }
