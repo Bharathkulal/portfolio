@@ -1,107 +1,156 @@
 import React from 'react';
-import SectionReveal from './SectionReveal';
 import { motion } from 'framer-motion';
-import { Network, Brain, Database, Cpu, Activity } from 'lucide-react';
+import { ArrowRight, Cpu, Sparkles, Database } from 'lucide-react';
 
-const pipelineBlocks = [
+const pillars = [
   {
-    icon: <Database className="text-brand-accent" size={22} />,
-    title: "1. Data Collection & Preprocessing",
-    desc: "Ingesting raw records, tokenizing documents, cleaning datasets, and normalising coordinates."
+    title: "Generative AI & LLMs",
+    desc: "Designing prompt engineering pipelines, retrieval-augmented generation (RAG), and custom structured agents."
   },
   {
-    icon: <Network className="text-brand-blue" size={22} />,
-    title: "2. Vector Embeddings & Vector Stores",
-    desc: "Mapping text blocks to dense coordinate vectors. Experimenting with local document retrieval indexing."
+    title: "Computer Vision",
+    desc: "Processing image/video streams, feature extraction, neural classification, and real-time tensor inference."
   },
   {
-    icon: <Brain className="text-brand-accent" size={22} />,
-    title: "3. Neural Layers & Prompt Engineering",
-    desc: "Structuring strict response formats from LLM interfaces. Designing custom context maps."
-  },
-  {
-    icon: <Cpu className="text-brand-blue" size={22} />,
-    title: "4. Fine-Tuning & Application Delivery",
-    desc: "Deploying model inference pipelines behind lightweight local APIs for frontend clients."
+    title: "Automated Systems",
+    desc: "Integrating Python and machine learning backends with responsive, user-friendly frontend interfaces."
   }
 ];
 
 export default function AISection() {
   return (
-    <section id="ai-focus" className="py-24 px-6 md:px-12 bg-brand-bg relative">
-      <div className="absolute inset-0 bg-gradient-to-b from-brand-bg/40 to-transparent pointer-events-none" />
-
-      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
-        <SectionReveal>
-          <div className="flex items-center gap-4 mb-16">
-            <span className="font-mono text-xs text-brand-accent">03 — AI / ML SPECIALIZATION</span>
-            <div className="h-px flex-grow bg-brand-border/50" />
+    <section 
+      id="ai-focus" 
+      className="editorial-section min-h-screen w-full bg-brand-bg relative flex items-center justify-center py-24 px-6 sm:px-10 lg:px-16 border-t border-brand-border/40"
+    >
+      <div className="w-full max-w-7xl mx-auto flex flex-col justify-between min-h-[80vh]">
+        
+        {/* Top Section Header */}
+        <div className="flex items-end justify-between border-b border-brand-border/40 pb-6 mb-10 text-left">
+          <div>
+            <span className="editorial-tag text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-2">
+              // METHODOLOGY
+            </span>
+            <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-brand-textPrimary uppercase leading-none">
+              AI FOCUS
+            </h2>
           </div>
-        </SectionReveal>
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          <span className="editorial-number text-5xl sm:text-6xl font-light text-brand-textSecondary/25 tracking-tighter">
+            04
+          </span>
+        </div>
+
+        {/* Main Content Area */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center flex-1 my-auto">
           
-          {/* Left: Copy & Diagram */}
-          <div className="lg:col-span-5 text-left">
-            <SectionReveal delay={0.1}>
-              <span className="font-mono text-[10px] text-brand-blue tracking-widest uppercase block mb-3">
-                ROADMAP // ENGINEERING FOCUS
-              </span>
-              <h2 className="font-serif text-3xl md:text-4xl font-extrabold text-brand-textPrimary mb-6 leading-tight">
-                AI is not a keyword. It is a direction.
-              </h2>
-              <p className="text-brand-textSecondary text-sm leading-relaxed mb-8">
-                My education program at Dr. B.B. Hegde College focuses heavily on the structural components of machine intelligence. I am building projects to explore neural processing pipelines, vector embedding databases, and model prompt design layers.
-              </p>
-            </SectionReveal>
+          {/* Left Column: Big Headline */}
+          <div className="lg:col-span-6 text-left flex flex-col justify-center">
+            <motion.h3 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+              className="editorial-title text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-textPrimary uppercase leading-tight mb-6"
+            >
+              BUILDING<br />
+              INTELLIGENT<br />
+              <span className="text-brand-accent">SYSTEMS.</span>
+            </motion.h3>
 
-            {/* Simulated Live telemetry stats */}
-            <SectionReveal delay={0.2}>
-              <div className="p-5 border border-brand-border/60 bg-brand-card/60 rounded-2xl flex items-center gap-4">
-                <div className="w-10 h-10 rounded-full bg-brand-accent/5 border border-brand-accent/20 flex items-center justify-center text-brand-accent animate-pulse">
-                  <Activity size={18} />
+            <p className="font-sans text-sm sm:text-base text-brand-textSecondary leading-relaxed max-w-lg font-normal">
+              Specializing in the intersection of cognitive algorithms, machine learning models, and intuitive user experiences.
+            </p>
+          </div>
+
+          {/* Right Column: Clean System Flow & Pillars */}
+          <div className="lg:col-span-6 flex flex-col justify-center gap-8">
+            
+            {/* Minimal System Flow: INPUT -> MODEL -> OUTPUT */}
+            <motion.div
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="p-6 rounded-2xl border border-brand-border/80 bg-brand-card/70 backdrop-blur-sm"
+            >
+              <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase block mb-4 text-left">
+                SYSTEM PIPELINE ARCHITECTURE
+              </span>
+
+              <div className="grid grid-cols-3 gap-2 sm:gap-4 items-center">
+                {/* 01. Input */}
+                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-brand-border/60 bg-brand-bg text-center">
+                  <Database size={16} className="text-brand-textSecondary mb-1.5" />
+                  <span className="font-mono text-[11px] font-bold text-brand-textPrimary uppercase tracking-wider">
+                    INPUT
+                  </span>
+                  <span className="text-[9px] text-brand-textSecondary mt-0.5">
+                    Data / Prompts
+                  </span>
                 </div>
-                <div className="font-mono">
-                  <span className="text-[10px] text-brand-textSecondary block uppercase tracking-wider">Telemetry State</span>
-                  <span className="text-xs text-brand-textPrimary font-semibold">LLM_ENGIN_ACTIVE // VECTOR_DB_STABLE</span>
+
+                {/* Arrow 1 */}
+                <div className="flex items-center justify-center text-brand-accent">
+                  <ArrowRight size={16} className="animate-pulse" />
+                </div>
+
+                {/* 02. Model */}
+                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-brand-accent/40 bg-brand-accent/5 text-center">
+                  <Cpu size={16} className="text-brand-accent mb-1.5" />
+                  <span className="font-mono text-[11px] font-bold text-brand-accent uppercase tracking-wider">
+                    MODEL
+                  </span>
+                  <span className="text-[9px] text-brand-textSecondary mt-0.5">
+                    Neural Engine
+                  </span>
                 </div>
               </div>
-            </SectionReveal>
-          </div>
 
-          {/* Right: Pipeline blocks */}
-          <div className="lg:col-span-7">
-            <div className="relative pl-6 md:pl-10 text-left border-l border-brand-border/80 flex flex-col gap-8">
-              {pipelineBlocks.map((block, idx) => (
-                <SectionReveal key={idx} delay={0.1 + idx * 0.08}>
-                  <div className="relative group">
-                    {/* Floating node dot */}
-                    <div className="absolute -left-[31px] md:-left-[47px] top-1.5 w-4 h-4 rounded-full border border-brand-border bg-brand-bg flex items-center justify-center group-hover:border-brand-accent transition-colors">
-                      <span className="w-1.5 h-1.5 rounded-full bg-brand-textSecondary group-hover:bg-brand-accent transition-colors"></span>
-                    </div>
+              <div className="flex items-center justify-center my-2 text-brand-accent">
+                <ArrowRight size={16} className="rotate-90 animate-pulse" />
+              </div>
 
-                    <motion.div 
-                      whileHover={{ x: 4 }}
-                      whileTap={{ scale: 0.98 }}
-                      className="p-5 bg-brand-card/40 border border-brand-border/60 hover:border-brand-accent/40 rounded-2xl transition-all shadow-sm cursor-default"
-                    >
-                      <div className="flex items-center gap-3 mb-3">
-                        {block.icon}
-                        <h3 className="font-sans font-bold text-brand-textPrimary text-sm md:text-base">
-                          {block.title}
-                        </h3>
-                      </div>
-                      <p className="text-brand-textSecondary text-xs leading-relaxed pl-8">
-                        {block.desc}
-                      </p>
-                    </motion.div>
+              {/* 03. Output */}
+              <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl border border-brand-border/60 bg-brand-bg text-left">
+                <div className="flex items-center gap-2.5">
+                  <Sparkles size={16} className="text-brand-accent" />
+                  <div>
+                    <span className="font-mono text-[11px] font-bold text-brand-textPrimary uppercase tracking-wider block">
+                      OUTPUT / ACTION
+                    </span>
+                    <span className="text-[9px] text-brand-textSecondary">
+                      Optimized Inference & Web Integration
+                    </span>
                   </div>
-                </SectionReveal>
+                </div>
+                <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest">
+                  READY
+                </span>
+              </div>
+            </motion.div>
+
+            {/* Three Clean Focus Areas */}
+            <div className="space-y-4 text-left">
+              {pillars.map((item, idx) => (
+                <div key={item.title} className="pb-3 border-b border-brand-border/30 last:border-0">
+                  <h4 className="font-sans font-bold text-sm text-brand-textPrimary mb-1">
+                    {item.title}
+                  </h4>
+                  <p className="font-sans text-xs text-brand-textSecondary leading-relaxed">
+                    {item.desc}
+                  </p>
+                </div>
               ))}
             </div>
+
           </div>
 
         </div>
+
+        {/* Bottom Section Margin */}
+        <div className="hidden sm:block" />
+
       </div>
     </section>
   );

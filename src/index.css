@@ -1,36 +1,33 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600;700;800&family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;0,8..60,700;0,8..60,800;1,8..60,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700&family=Inter:wght@300;400;500;600;700;800;900&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&display=swap');
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Default Light Theme variables (Premium white editorial style) */
+/* Minimal Editorial Color Tokens */
 :root {
-  --bg: #ecdcb9;
-  --surface: #ffffff;
-  --surface-2: #dfd0ab;
-  --text: #111111;
-  --muted: #5f6368;
-  --border: rgba(0, 0, 0, 0.10);
-  --grid: rgba(0, 0, 0, 0.05);
-  --shadow: rgba(0, 0, 0, 0.08);
-  --accent: #00b86b;
-  --grid-opacity: 0.05;
+  --bg: #0a0a0c;
+  --surface: #121215;
+  --surface-2: #1a1a1f;
+  --text: #f4f4f5;
+  --muted: #8e8e93;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.16);
+  --accent: #00ff88;
+  --accent-rgb: 0, 255, 136;
 }
 
-/* Dark Theme overrides when data-theme is dark */
-:root[data-theme="dark"],
-[data-theme="dark"] {
-  --bg: #000000;
-  --surface: #101214;
-  --surface-2: #151719;
-  --text: #f5f5f5;
-  --muted: #9ca3af;
-  --border: rgba(255, 255, 255, 0.10);
-  --grid: rgba(255, 255, 255, 0.035);
-  --shadow: rgba(0, 0, 0, 0.30);
-  --accent: #00ff88;
-  --grid-opacity: 0.25;
+:root[data-theme="light"],
+[data-theme="light"] {
+  --bg: #f7f7f8;
+  --surface: #ffffff;
+  --surface-2: #efeff1;
+  --text: #09090b;
+  --muted: #64748b;
+  --border: rgba(0, 0, 0, 0.08);
+  --border-strong: rgba(0, 0, 0, 0.16);
+  --accent: #00b86b;
+  --accent-rgb: 0, 184, 107;
 }
 
 @layer base {
@@ -40,171 +37,74 @@
     background-color: var(--bg) !important;
     color: var(--text) !important;
     scroll-behavior: smooth;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
-  
+
   body {
     margin: 0;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch; /* Momentum scrolling on iOS */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     transition: background-color 300ms ease, color 300ms ease;
   }
-
-  /* Target smooth theme transition to layout containers rather than all elements */
-  .theme-transition {
-    transition: background-color 300ms ease, color 300ms ease, border-color 300ms ease, box-shadow 300ms ease;
-  }
 }
-
-/* Light SaaS Admin theme overrides */
-.theme-light-admin {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-2: #f1f5f9;
-  --text: #0f172a;
-  --muted: #475569;
-  --border: #e2e8f0;
-  --shadow: rgba(0, 0, 0, 0.05);
-  --accent: #2563eb;
-}
-
-/* Force solid surfaces inside admin theme to override transparency */
-.theme-light-admin .bg-brand-card\/30,
-.theme-light-admin .bg-brand-card\/20,
-.theme-light-admin .bg-brand-card\/45 {
-  background-color: var(--surface) !important;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03) !important;
-}
-
-.theme-light-admin .bg-black\/40,
-.theme-light-admin .bg-black\/20,
-.theme-light-admin .bg-black\/60,
-.theme-light-admin .bg-brand-bg\/40 {
-  background-color: var(--surface-2) !important;
-}
-
-.theme-light-admin .border-brand-border\/60,
-.theme-light-admin .border-brand-border\/40,
-.theme-light-admin .border-brand-border\/20,
-.theme-light-admin .border-brand-border\/50 {
-  border-color: var(--border) !important;
-}
-
-.theme-light-admin .divide-brand-border\/20 > :not([hidden]) ~ :not([hidden]) {
-  border-color: var(--border) !important;
-}
-
-/* Inputs styling overrides */
-.theme-light-admin input,
-.theme-light-admin textarea,
-.theme-light-admin select {
-  background-color: var(--surface) !important;
-  color: var(--text) !important;
-  border-color: var(--border) !important;
-}
-
-.theme-light-admin input:focus,
-.theme-light-admin textarea:focus,
-.theme-light-admin select:focus {
-  border-color: var(--accent) !important;
-  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1) !important;
-}
-
-.theme-light-admin tr.hover\:bg-brand-card\/10:hover {
-  background-color: var(--surface-2) !important;
-}
-
-.theme-light-admin .bg-brand-accent\/5 {
-  background-color: rgba(37, 99, 235, 0.05) !important;
-}
-
-.theme-light-admin .border-brand-accent\/30 {
-  border-color: rgba(37, 99, 235, 0.2) !important;
-}
-
-.theme-light-admin .text-brand-accent {
-  color: var(--accent) !important;
-}
-
 
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 ::-webkit-scrollbar-track {
   background: var(--bg);
 }
 ::-webkit-scrollbar-thumb {
-  background: var(--surface-2);
-  border-radius: 3px;
+  background: var(--border-strong);
+  border-radius: 2px;
 }
 ::-webkit-scrollbar-thumb:hover {
   background: var(--accent);
 }
 
-/* Technical grid backdrop animation */
-.tech-grid-bg {
-  background-image: 
-    linear-gradient(rgba(26, 26, 36, var(--grid-opacity)) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(26, 26, 36, var(--grid-opacity)) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-/* Custom glassmorphism elements */
-.glass-panel {
-  background: rgba(var(--surface), 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid var(--border);
-}
-
-/* Big typography text outline styling */
-.text-outline {
-  -webkit-text-stroke: 1.5px var(--text);
-  color: transparent;
-}
-
-.text-outline-accent {
-  -webkit-text-stroke: 1.5px var(--accent);
-  color: transparent;
-}
-
-.hero-giant-text {
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  letter-spacing: -0.03em;
-  line-height: 0.85;
+/* Editorial Typography Helpers */
+.editorial-title {
+  font-family: 'Inter', sans-serif;
+  letter-spacing: -0.04em;
+  line-height: 0.9;
   user-select: none;
 }
 
-/* Caret blinking animation keyframes */
-@keyframes caretBlink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.editorial-number {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: -0.02em;
 }
 
-/* Marquee Scroll Animations */
-@keyframes marqueeLeft {
-  0% { transform: translate3d(0, 0, 0); }
-  100% { transform: translate3d(-100%, 0, 0); }
+.editorial-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
 }
 
-@keyframes marqueeRight {
-  0% { transform: translate3d(-100%, 0, 0); }
-  100% { transform: translate3d(0, 0, 0); }
+/* Subtle Film Grain (Very discreet texture) */
+.grain-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 999;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
 }
 
-.animate-marquee-left {
-  animation: marqueeLeft linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
-}
-
-.animate-marquee-right {
-  animation: marqueeRight linear infinite;
-  will-change: transform;
-  backface-visibility: hidden;
-  transform-style: preserve-3d;
+/* Fullscreen Section Container */
+.editorial-section {
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
 }
 
 /* Orbit Rotations */
@@ -238,5 +138,3 @@
     scroll-behavior: auto !important;
   }
 }
-
-

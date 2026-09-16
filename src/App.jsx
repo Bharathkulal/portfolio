@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import Hero from './components/Hero';
@@ -7,13 +7,9 @@ import Skills from './components/Skills';
 import ProjectShowcase from './components/ProjectShowcase';
 import ProjectModal from './components/ProjectModal';
 import AISection from './components/AISection';
-import Timeline from './components/Timeline';
-import Achievements from './components/Achievements';
-import Certifications from './components/Certifications';
 import Contact from './components/Contact';
-import SectionReveal from './components/SectionReveal';
 import { projectsData } from './data/portfolioData';
-import { ThemeProvider, useTheme } from './context/ThemeContext';
+import { ThemeProvider } from './context/ThemeContext';
 
 // Admin Components
 import Login from './admin/Login';
@@ -23,10 +19,8 @@ function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [dynProjects, setDynProjects] = useState([]);
   const [aboutInfo, setAboutInfo] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  // Fetch dynamic content from server, fall back to local mock data if offline
-  React.useEffect(() => {
+  useEffect(() => {
     const loadData = async () => {
       // 1. Fetch About Info
       try {
@@ -41,8 +35,8 @@ function PublicPortfolio() {
             setAboutInfo(aboutData);
           }
         }
-      } catch (error) {
-        console.warn('Backend offline or failed to fetch about info, using fallback.');
+      } catch {
+        // Fallback gracefully
       }
 
       // 2. Fetch Projects
@@ -56,61 +50,50 @@ function PublicPortfolio() {
           const data = await res.json();
           if (data && data.length > 0) {
             setDynProjects(data);
-            setLoading(false);
             return;
           }
         }
-      } catch (error) {
-        console.warn('Backend offline, using local static data fallback.');
+      } catch {
+        // Fallback gracefully
       }
       setDynProjects(projectsData);
-      setLoading(false);
     };
     loadData();
   }, []);
 
   return (
     <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
-      {/* Background Decorative Tech Outlines */}
-      <div className="fixed inset-0 opacity-[0.02] tech-grid-bg pointer-events-none -z-10" />
+      {/* Subtle Grain Texture Overlay */}
+      <div className="grain-overlay" />
 
-      {/* Navigation Pill Overlay */}
+      {/* Minimal Navigation & Edge Progress Indicator */}
       <Navigation />
 
-      {/* Single-Page Story Sections */}
-      <main className="pb-24 md:pb-12">
-        {/* 01. Hero Intro */}
-        <Hero aboutInfo={aboutInfo} />
+      {/* Minimal Scroll-Driven Editorial Sequence */}
+      <main className="w-full">
+        {/* Screen 00: Opening Title */}
+        <Hero />
 
-        {/* 02. About Narrative */}
+        {/* Screen 01: Three-Column Editorial About Me */}
         <About aboutInfo={aboutInfo} />
 
-        {/* 03. Capabilities Grid */}
+        {/* Screen 02: Typography-Driven Skills */}
         <Skills />
 
-        {/* 04. Selected Work Modules - Infinite Continuous Stream */}
+        {/* Screen 03: Editorial Project Showcase */}
         <ProjectShowcase 
-          projects={dynProjects} 
+          projects={dynProjects.length > 0 ? dynProjects : projectsData} 
           onSelectProject={setSelectedProject} 
         />
 
-        {/* 05. AI/ML Deepening */}
+        {/* Screen 04: AI Focus & Methodology */}
         <AISection />
 
-        {/* 06. Journey Timeline */}
-        <Timeline />
-
-        {/* 07. Achievements & Expo */}
-        <Achievements />
-
-        {/* 08. Certifications Tracker */}
-        <Certifications />
-
-        {/* 09. Connection Console */}
+        {/* Screen 05: Minimal Contact Screen */}
         <Contact />
       </main>
 
-      {/* Dynamic Inspector Drawer Modal */}
+      {/* Dynamic Project Architecture Inspection Drawer */}
       {selectedProject && (
         <ProjectModal 
           project={{
@@ -121,14 +104,6 @@ function PublicPortfolio() {
           onClose={() => setSelectedProject(null)} 
         />
       )}
-
-      {/* Global Mini Technical Footer */}
-      <footer className="py-12 border-t border-brand-border/60 bg-brand-bg text-center font-mono text-[9px] text-brand-textSecondary tracking-wider">
-        <div className="w-full max-w-6xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <span>BHARATH KULAL // PORTFOLIO_v3.0.0</span>
-          <span>BUILD: STABLE // HOSTED: GITHUB_PAGES</span>
-        </div>
-      </footer>
     </div>
   );
 }

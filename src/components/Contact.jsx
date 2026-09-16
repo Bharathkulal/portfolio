@@ -1,223 +1,222 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import SectionReveal from './SectionReveal';
-import { Mail, Phone, FileText, Send, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowUpRight, Copy, Check, Send, Download } from 'lucide-react';
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+  const [showForm, setShowForm] = useState(false);
   const [formState, setFormState] = useState({ name: '', email: '', message: '' });
-  const [submitted, setSubmitted] = useState(false);
+  const [formStatus, setFormStatus] = useState(null);
 
-  const handleSubmit = (e) => {
+  const email = "kulalbharath8@gmail.com";
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(email);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handleFormSubmit = async (e) => {
     e.preventDefault();
-    // Communicate with FastAPI backend if running, otherwise log and local success
-    fetch('http://localhost:8000/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formState)
-    })
-    .then(res => res.json())
-    .then(data => {
-      console.log("Backend log:", data);
-    })
-    .catch(err => {
-      console.log("FastAPI backend offline, handling submissions locally:", err);
-    });
-
-    setSubmitted(true);
-    setFormState({ name: '', email: '', message: '' });
-    setTimeout(() => setSubmitted(false), 5000);
+    setFormStatus('sending');
+    try {
+      const res = await fetch('https://bharath-portfolio-backend.onrender.com/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formState)
+      });
+      if (res.ok) {
+        setFormStatus('success');
+        setFormState({ name: '', email: '', message: '' });
+      } else {
+        setFormStatus('fallback');
+      }
+    } catch {
+      setFormStatus('fallback');
+    }
   };
 
   return (
-    <section id="contact" className="py-24 px-6 md:px-12 bg-brand-bg relative overflow-hidden">
-      {/* Background radial highlight */}
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-brand-accent/5 rounded-full blur-[140px] pointer-events-none" />
-
-      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto">
-        <SectionReveal>
-          <div className="flex items-center gap-4 mb-16">
-            <span className="font-mono text-xs text-brand-accent">07 — CONNECTION</span>
-            <div className="h-px flex-grow bg-brand-border/50" />
-          </div>
-        </SectionReveal>
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 text-left items-start">
-          
-          {/* Left Connect Anchors Column */}
-          <div className="lg:col-span-5">
-            <SectionReveal delay={0.1}>
-              <h2 className="font-serif text-3xl md:text-5xl font-extrabold text-brand-textPrimary mb-6 tracking-tight leading-none">
-                HAVE AN IDEA WORTH BUILDING?
-              </h2>
-              <p className="text-brand-textSecondary text-xs md:text-sm leading-relaxed mb-8 max-w-sm">
-                Get in touch using the terminal transmission form, or select direct links below.
-              </p>
-            </SectionReveal>
-
-            <SectionReveal delay={0.2}>
-              <div className="flex flex-col gap-4">
-                {/* Email */}
-                <motion.div 
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-2 rounded-2xl hover:bg-brand-card/40 transition-colors group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border group-hover:border-brand-accent/40 flex items-center justify-center text-brand-accent transition-colors shadow-sm">
-                    <Mail size={18} />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] text-brand-textSecondary block uppercase tracking-wider">EMAIL_TRANSMISSION</span>
-                    <span className="text-xs text-brand-textPrimary font-mono select-all">[ add-email@domain.com ]</span>
-                  </div>
-                </motion.div>
-
-                {/* Phone */}
-                <motion.div 
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-2 rounded-2xl hover:bg-brand-card/40 transition-colors group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border group-hover:border-brand-accent/40 flex items-center justify-center text-brand-blue transition-colors shadow-sm">
-                    <Phone size={18} />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] text-brand-textSecondary block uppercase tracking-wider">TELEPHONY_LOG</span>
-                    <span className="text-xs text-brand-textPrimary font-mono select-all">[ +91 XXXXX XXXXX ]</span>
-                  </div>
-                </motion.div>
-
-                {/* GitHub */}
-                <motion.div 
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-2 rounded-2xl hover:bg-brand-card/40 transition-colors group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border group-hover:border-brand-accent/40 flex items-center justify-center text-brand-textPrimary transition-colors shadow-sm">
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] text-brand-textSecondary block uppercase tracking-wider">CODE_CORPUS // GITHUB</span>
-                    <span className="text-xs text-brand-textPrimary font-mono select-all">[ github.com/username ]</span>
-                  </div>
-                </motion.div>
-
-                {/* LinkedIn */}
-                <motion.div 
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-2 rounded-2xl hover:bg-brand-card/40 transition-colors group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border group-hover:border-brand-accent/40 flex items-center justify-center text-brand-blue transition-colors shadow-sm">
-                    <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                      <path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.779-1.75-1.75s.784-1.75 1.75-1.75 1.75.779 1.75 1.75-.784 1.75-1.75 1.75zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] text-brand-textSecondary block uppercase tracking-wider">NETWORKING // LINKEDIN</span>
-                    <span className="text-xs text-brand-textPrimary font-mono select-all">[ linkedin.com/in/username ]</span>
-                  </div>
-                </motion.div>
-
-                {/* Resume */}
-                <motion.div 
-                  whileHover={{ x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="flex items-center gap-4 p-2 rounded-2xl hover:bg-brand-card/40 transition-colors group cursor-default"
-                >
-                  <div className="w-10 h-10 rounded-xl bg-brand-card border border-brand-border group-hover:border-brand-accent/40 flex items-center justify-center text-brand-accent transition-colors shadow-sm">
-                    <FileText size={18} />
-                  </div>
-                  <div>
-                    <span className="font-mono text-[9px] text-brand-textSecondary block uppercase tracking-wider">SYNOPSIS // RESUME</span>
-                    <span className="text-xs text-brand-textPrimary font-mono select-all">[ Link to Resume Document ]</span>
-                  </div>
-                </motion.div>
-              </div>
-            </SectionReveal>
+    <section 
+      id="contact" 
+      className="editorial-section min-h-screen w-full bg-brand-bg relative flex items-center justify-center py-24 px-6 sm:px-10 lg:px-16 border-t border-brand-border/40"
+    >
+      <div className="w-full max-w-7xl mx-auto flex flex-col justify-between min-h-[80vh]">
+        
+        {/* Top Bar */}
+        <div className="flex items-end justify-between border-b border-brand-border/40 pb-6 mb-12 text-left">
+          <div>
+            <span className="editorial-tag text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-2">
+              // GET IN TOUCH
+            </span>
+            <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-brand-textPrimary uppercase leading-none">
+              CONTACT
+            </h2>
           </div>
 
-          {/* Right Message Form Column */}
-          <div className="lg:col-span-7">
-            <SectionReveal delay={0.2}>
-              <div className="p-6 sm:p-8 bg-brand-card/40 border border-brand-border/60 rounded-3xl relative shadow-sm">
-                <div className="absolute top-4 right-4 font-mono text-[8px] text-brand-textSecondary">
-                  TRANSMIT_CONSOLE_v1.0
-                </div>
+          <span className="editorial-number text-5xl sm:text-6xl font-light text-brand-textSecondary/25 tracking-tighter">
+            05
+          </span>
+        </div>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="name" className="font-mono text-[9px] text-brand-textSecondary uppercase tracking-widest">
-                      Sender Name:
-                    </label>
-                    <input 
-                      type="text" 
-                      id="name"
+        {/* Center Main Stage */}
+        <div className="my-auto text-left py-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
+          >
+            {/* Huge Closing Title */}
+            <h3 className="editorial-title text-5xl sm:text-7xl lg:text-8xl font-black tracking-tight text-brand-textPrimary uppercase leading-none mb-6">
+              LET'S BUILD<br />
+              <span className="text-brand-accent">SOMETHING.</span>
+            </h3>
+
+            <p className="font-sans text-base sm:text-lg text-brand-textSecondary max-w-xl mb-10 font-normal">
+              Have an idea, research project, or engineering opportunity? Let's connect and build intelligent solutions.
+            </p>
+
+            {/* Direct Email Interaction Pill */}
+            <div className="flex flex-wrap items-center gap-4 mb-12">
+              <a
+                href={`mailto:${email}`}
+                className="flex items-center gap-3 bg-brand-card hover:bg-brand-surface-2 border border-brand-border/80 hover:border-brand-accent/50 px-6 py-3.5 rounded-full font-mono text-sm text-brand-textPrimary transition-all duration-200 shadow-sm"
+              >
+                <Mail size={16} className="text-brand-accent" />
+                <span>{email}</span>
+              </a>
+
+              <button
+                onClick={handleCopyEmail}
+                title="Copy Email to Clipboard"
+                className="flex items-center gap-2 border border-brand-border bg-brand-card/60 hover:bg-brand-card px-5 py-3.5 rounded-full font-mono text-xs text-brand-textSecondary hover:text-brand-textPrimary transition-all cursor-pointer"
+              >
+                {copied ? <Check size={14} className="text-brand-accent" /> : <Copy size={14} />}
+                <span>{copied ? 'Copied!' : 'Copy Email'}</span>
+              </button>
+
+              <button
+                onClick={() => setShowForm(!showForm)}
+                className="flex items-center gap-2 bg-brand-accent text-brand-bg px-6 py-3.5 rounded-full font-semibold font-mono text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-lg hover:shadow-brand-accent/20 cursor-pointer"
+              >
+                <Send size={14} />
+                <span>{showForm ? 'Hide Form' : 'Send Direct Message'}</span>
+              </button>
+            </div>
+
+            {/* Inline Fast Message Form (Collapsible) */}
+            {showForm && (
+              <motion.form
+                initial={{ opacity: 0, height: 0 }}
+                animate={{ opacity: 1, height: 'auto' }}
+                exit={{ opacity: 0, height: 0 }}
+                onSubmit={handleFormSubmit}
+                className="max-w-xl p-6 rounded-2xl border border-brand-border/80 bg-brand-card/90 backdrop-blur-md mb-12 space-y-4"
+              >
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="font-mono text-[10px] uppercase text-brand-textSecondary block mb-1">Your Name</label>
+                    <input
+                      type="text"
                       required
-                      placeholder="[ Enter your name ]"
                       value={formState.name}
                       onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3.5 py-2 font-sans text-xs text-brand-textPrimary focus:border-brand-accent outline-none"
                     />
                   </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="email" className="font-mono text-[9px] text-brand-textSecondary uppercase tracking-widest">
-                      Sender Email Address:
-                    </label>
-                    <input 
-                      type="email" 
-                      id="email"
+                  <div>
+                    <label className="font-mono text-[10px] uppercase text-brand-textSecondary block mb-1">Your Email</label>
+                    <input
+                      type="email"
                       required
-                      placeholder="[ Enter your email address ]"
                       value={formState.email}
                       onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors"
+                      className="w-full bg-brand-bg border border-brand-border rounded-lg px-3.5 py-2 font-sans text-xs text-brand-textPrimary focus:border-brand-accent outline-none"
                     />
                   </div>
-
-                  <div className="flex flex-col gap-1.5">
-                    <label htmlFor="msg" className="font-mono text-[9px] text-brand-textSecondary uppercase tracking-widest">
-                      Message Payload:
-                    </label>
-                    <textarea 
-                      id="msg"
-                      required
-                      rows={5}
-                      placeholder="[ Enter your message content here... ]"
-                      value={formState.message}
-                      onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                      className="bg-brand-bg border border-brand-border focus:border-brand-accent/60 outline-none rounded-xl py-3 px-4 font-mono text-xs text-brand-textPrimary transition-colors resize-none"
-                    />
-                  </div>
-
-                  <motion.button 
-                    type="submit"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.96 }}
-                    className="flex items-center justify-center gap-2 bg-brand-accent hover:bg-white text-brand-bg py-3 px-7 rounded-full font-mono text-xs font-bold transition-all duration-300 self-start shadow-md hover:shadow-brand-accent/20 cursor-pointer"
-                  >
-                    SUBMIT_TRANSMISSION
-                    <Send size={12} />
-                  </motion.button>
-                </form>
-
-                {/* Submission Success Alert */}
-                {submitted && (
-                  <div className="absolute inset-0 bg-brand-card flex flex-col items-center justify-center rounded-3xl p-6 text-center animate-fade-in">
-                    <CheckCircle2 size={36} className="text-brand-accent mb-3 animate-bounce" />
-                    <span className="font-mono text-xs text-brand-textPrimary font-semibold mb-2">TRANSMISSION COMPLETELY LOGGED</span>
-                    <p className="text-brand-textSecondary text-[11px] leading-relaxed max-w-[240px]">
-                      Your connection packet has been submitted. Connection logs successfully cached.
-                    </p>
-                  </div>
+                </div>
+                <div>
+                  <label className="font-mono text-[10px] uppercase text-brand-textSecondary block mb-1">Message</label>
+                  <textarea
+                    rows={3}
+                    required
+                    value={formState.message}
+                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
+                    className="w-full bg-brand-bg border border-brand-border rounded-lg px-3.5 py-2 font-sans text-xs text-brand-textPrimary focus:border-brand-accent outline-none"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={formStatus === 'sending'}
+                  className="bg-brand-accent text-brand-bg px-6 py-2.5 rounded-lg font-mono text-xs font-bold uppercase tracking-wider cursor-pointer"
+                >
+                  {formStatus === 'sending' ? 'Sending...' : formStatus === 'success' ? 'Message Sent!' : 'Send Note'}
+                </button>
+                {formStatus === 'fallback' && (
+                  <p className="font-mono text-[11px] text-amber-400 mt-2">
+                    Backend offline. Please reach out directly via {email}
+                  </p>
                 )}
-              </div>
-            </SectionReveal>
-          </div>
+              </motion.form>
+            )}
 
+            {/* External Links Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-8 border-t border-brand-border/40">
+              <a
+                href="https://github.com/BharathKulal"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between p-4 rounded-xl border border-brand-border/60 hover:border-brand-accent/50 bg-brand-card/40 hover:bg-brand-card transition-all"
+              >
+                <div>
+                  <span className="editorial-tag text-[9px] text-brand-textSecondary block">CODE REPOSITORY</span>
+                  <span className="font-mono text-xs text-brand-textPrimary font-semibold">GitHub</span>
+                </div>
+                <ArrowUpRight size={14} className="text-brand-textSecondary group-hover:text-brand-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+
+              <a
+                href="https://linkedin.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between p-4 rounded-xl border border-brand-border/60 hover:border-brand-accent/50 bg-brand-card/40 hover:bg-brand-card transition-all"
+              >
+                <div>
+                  <span className="editorial-tag text-[9px] text-brand-textSecondary block">PROFESSIONAL</span>
+                  <span className="font-mono text-xs text-brand-textPrimary font-semibold">LinkedIn</span>
+                </div>
+                <ArrowUpRight size={14} className="text-brand-textSecondary group-hover:text-brand-accent group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </a>
+
+              <a
+                href="/resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex items-center justify-between p-4 rounded-xl border border-brand-border/60 hover:border-brand-accent/50 bg-brand-card/40 hover:bg-brand-card transition-all"
+              >
+                <div>
+                  <span className="editorial-tag text-[9px] text-brand-textSecondary block">CREDENTIALS</span>
+                  <span className="font-mono text-xs text-brand-textPrimary font-semibold">Resume PDF</span>
+                </div>
+                <Download size={14} className="text-brand-textSecondary group-hover:text-brand-accent transition-transform" />
+              </a>
+
+              <div className="p-4 rounded-xl border border-brand-border/60 bg-brand-card/40 flex flex-col justify-center">
+                <span className="editorial-tag text-[9px] text-brand-textSecondary block">TIMEZONE</span>
+                <span className="font-mono text-xs text-brand-textPrimary font-semibold">IST (UTC+5:30)</span>
+              </div>
+            </div>
+
+          </motion.div>
         </div>
+
+        {/* Minimal Bottom Footer */}
+        <div className="pt-8 border-t border-brand-border/30 flex flex-col sm:flex-row justify-between items-center text-[10px] font-mono text-brand-textSecondary gap-2">
+          <span>BHARATH KULAL // EDITORIAL PORTFOLIO</span>
+          <span>DESIGNED & ENGINEERED • 2026</span>
+        </div>
+
       </div>
     </section>
   );

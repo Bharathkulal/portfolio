@@ -1,346 +1,231 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowUpRight, Sparkles, Terminal, Layers } from 'lucide-react';
-import { ProjectVisual } from './ProjectCard';
-import SectionReveal from './SectionReveal';
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight, ChevronLeft, ChevronRight, Layers, Code } from 'lucide-react';
 
 export default function ProjectShowcase({ projects = [], onSelectProject }) {
-  const containerRef = useRef(null);
-  const trackRef = useRef(null);
-  const animFrameRef = useRef(null);
-  const shouldReduceMotion = useReducedMotion();
+  const [currentIdx, setCurrentIdx] = useState(0);
 
-  // Physics and Position Refs for 60fps Direct DOM Animation
-  const offsetRef = useRef(0);
-  const defaultSpeed = -0.9; // Smooth cinematic default auto-scroll speed (px/frame)
-  const speedRef = useRef(defaultSpeed);
-  const targetSpeedRef = useRef(defaultSpeed);
-  
-  const isDraggingRef = useRef(false);
-  const startXRef = useRef(0);
-  const lastXRef = useRef(0);
-  const lastTimeRef = useRef(0);
-  const velocityRef = useRef(0);
-  const isHoveredRef = useRef(false);
-  const preventClickRef = useRef(false);
-  const singleSetWidthRef = useRef(0);
+  if (!projects || projects.length === 0) return null;
 
-  const [cardWidth, setCardWidth] = useState(400);
-  const [gap, setGap] = useState(24);
+  const project = projects[currentIdx] || projects[0];
+  const tags = project.technologies || project.tags || [];
 
-  // Responsive card size calculation
-  useEffect(() => {
-    const updateDimensions = () => {
-      const w = window.innerWidth;
-      if (w < 640) {
-        // Mobile: 1 full card + peeking edge
-        setCardWidth(Math.min(w * 0.84, 340));
-        setGap(16);
-      } else if (w < 1024) {
-        setCardWidth(360);
-        setGap(20);
-      } else {
-        setCardWidth(410);
-        setGap(28);
-      }
-    };
-
-    updateDimensions();
-    window.addEventListener('resize', updateDimensions);
-    return () => window.removeEventListener('resize', updateDimensions);
-  }, []);
-
-  const totalProjects = projects.length || 1;
-  const singleSetWidth = totalProjects * (cardWidth + gap);
-  singleSetWidthRef.current = singleSetWidth;
-
-  // Quadruple items to guarantee a mathematically seamless infinite wrap
-  const loopedProjects = [...projects, ...projects, ...projects, ...projects];
-
-  // =========================================================================
-  // ANIMATION LOOP WITH INERTIA & SEAMLESS WRAPPING
-  // =========================================================================
-  useEffect(() => {
-    if (shouldReduceMotion) return;
-
-    let lastTimestamp = performance.now();
-
-    const loop = (now) => {
-      const dt = Math.min((now - lastTimestamp) / 16.666, 2.5); // Normalized frame delta
-      lastTimestamp = now;
-
-      if (!isDraggingRef.current) {
-        // Handle hovering: slow down to gentle float on hover
-        if (isHoveredRef.current) {
-          targetSpeedRef.current = defaultSpeed * 0.15;
-        } else {
-          targetSpeedRef.current = defaultSpeed;
-        }
-
-        // Smooth momentum decay towards target auto-speed
-        speedRef.current += (targetSpeedRef.current - speedRef.current) * 0.04 * dt;
-        offsetRef.current += speedRef.current * dt;
-
-        // Mathematical seamless wrapping
-        if (singleSetWidthRef.current > 0) {
-          if (offsetRef.current <= -singleSetWidthRef.current) {
-            offsetRef.current += singleSetWidthRef.current;
-          } else if (offsetRef.current > 0) {
-            offsetRef.current -= singleSetWidthRef.current;
-          }
-        }
-
-        if (trackRef.current) {
-          trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
-        }
-      }
-
-      animFrameRef.current = requestAnimationFrame(loop);
-    };
-
-    animFrameRef.current = requestAnimationFrame(loop);
-    return () => {
-      if (animFrameRef.current) cancelAnimationFrame(animFrameRef.current);
-    };
-  }, [shouldReduceMotion, singleSetWidth]);
-
-  // =========================================================================
-  // MOUSE & TOUCH POINTER DRAG INTERACTION WITH VELOCITY
-  // =========================================================================
-  const handlePointerDown = (e) => {
-    if (e.button !== undefined && e.button !== 0) return; // Only primary button
-    isDraggingRef.current = true;
-    startXRef.current = e.clientX;
-    lastXRef.current = e.clientX;
-    lastTimeRef.current = performance.now();
-    velocityRef.current = 0;
-    preventClickRef.current = false;
-
-    if (trackRef.current) {
-      trackRef.current.style.cursor = 'grabbing';
-      try {
-        trackRef.current.setPointerCapture(e.pointerId);
-      } catch (_) {}
-    }
+  const handleNext = () => {
+    setCurrentIdx((prev) => (prev + 1) % projects.length);
   };
 
-  const handlePointerMove = (e) => {
-    if (!isDraggingRef.current) return;
-
-    const currentX = e.clientX;
-    const now = performance.now();
-    const deltaX = currentX - lastXRef.current;
-    const dt = Math.max(now - lastTimeRef.current, 1);
-
-    if (Math.abs(currentX - startXRef.current) > 5) {
-      preventClickRef.current = true;
-    }
-
-    offsetRef.current += deltaX;
-
-    // Instantaneous velocity calculation with rolling filter
-    const instantVelocity = (deltaX / dt) * 16.666;
-    velocityRef.current = velocityRef.current * 0.5 + instantVelocity * 0.5;
-
-    // Seamless wrap during manual drag
-    if (singleSetWidthRef.current > 0) {
-      if (offsetRef.current <= -singleSetWidthRef.current) {
-        offsetRef.current += singleSetWidthRef.current;
-      } else if (offsetRef.current > 0) {
-        offsetRef.current -= singleSetWidthRef.current;
-      }
-    }
-
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translate3d(${offsetRef.current}px, 0, 0)`;
-    }
-
-    lastXRef.current = currentX;
-    lastTimeRef.current = now;
-  };
-
-  const handlePointerUp = (e) => {
-    if (!isDraggingRef.current) return;
-    isDraggingRef.current = false;
-
-    if (trackRef.current) {
-      trackRef.current.style.cursor = 'grab';
-      try {
-        trackRef.current.releasePointerCapture(e.pointerId);
-      } catch (_) {}
-    }
-
-    // Apply drag velocity as initial inertia (clamped for natural physics)
-    const clampedVelocity = Math.max(Math.min(velocityRef.current * 0.85, 28), -28);
-    if (Math.abs(clampedVelocity) > 0.4) {
-      speedRef.current = clampedVelocity;
-    }
-
-    // Reset prevent click flag after short delay
-    setTimeout(() => {
-      preventClickRef.current = false;
-    }, 120);
-  };
-
-  const handleCardClick = (project) => {
-    if (preventClickRef.current) return;
-    if (onSelectProject) {
-      onSelectProject(project);
-    }
+  const handlePrev = () => {
+    setCurrentIdx((prev) => (prev - 1 + projects.length) % projects.length);
   };
 
   return (
     <section 
-      id="projects" 
-      className="py-24 md:py-28 bg-brand-bg relative overflow-hidden select-none transition-colors duration-300"
+      id="work" 
+      className="editorial-section min-h-screen w-full bg-brand-bg relative flex items-center justify-center py-24 px-6 sm:px-10 lg:px-16 border-t border-brand-border/40"
     >
-      {/* Background Soft Glow Accents */}
-      <div className="absolute top-1/2 left-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-brand-accent/5 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/2 right-1/4 -translate-y-1/2 w-[450px] h-[450px] bg-brand-blue/5 rounded-full blur-[140px] pointer-events-none" />
-
-      {/* Header Container */}
-      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto mb-10">
-        <SectionReveal>
-          <div className="flex items-center gap-4 mb-6">
-            <span className="font-mono text-xs text-brand-accent tracking-widest uppercase font-semibold">
-              03 — SELECTED WORK
+      <div className="w-full max-w-7xl mx-auto flex flex-col justify-between min-h-[80vh]">
+        
+        {/* =================================================================== */}
+        {/* TOP BAR: Header, Counter & Project Number */}
+        {/* =================================================================== */}
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between border-b border-brand-border/40 pb-6 mb-8 gap-4 text-left">
+          <div>
+            <span className="editorial-tag text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-2">
+              // SELECTED WORK
             </span>
-            <div className="h-px flex-grow bg-brand-border/60" />
+            <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-brand-textPrimary uppercase leading-none">
+              WORK
+            </h2>
           </div>
 
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 text-left">
-            <div>
-              <h2 className="font-serif text-3xl sm:text-5xl font-extrabold text-brand-textPrimary tracking-tight leading-tight">
-                Infinite Project Stream
-              </h2>
-              <p className="font-sans text-xs sm:text-sm text-brand-textSecondary mt-2 max-w-xl font-normal">
-                Continuous autonomous engineering showcase. Drag, interact, or explore any module.
-              </p>
-            </div>
-
-            {/* Interaction Hint Badge */}
-            <div className="hidden sm:flex items-center gap-2 font-mono text-[10px] text-brand-textSecondary bg-brand-card/60 border border-brand-border/60 px-3.5 py-1.5 rounded-full">
-              <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
-              <span>DRAG TO EXPLORE // CONTINUOUS FLOW</span>
-            </div>
-          </div>
-        </SectionReveal>
-      </div>
-
-      {/* ===================================================================== */}
-      {/* INFINITE FLOW TRACK WITH AMBIENT VIGNETTE MASKS */}
-      {/* ===================================================================== */}
-      <div 
-        ref={containerRef}
-        className="relative w-full overflow-hidden py-6 cursor-grab active:cursor-grabbing touch-pan-y"
-        onPointerDown={handlePointerDown}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-        onPointerCancel={handlePointerUp}
-        onMouseEnter={() => { isHoveredRef.current = true; }}
-        onMouseLeave={() => { 
-          isHoveredRef.current = false; 
-          isDraggingRef.current = false;
-        }}
-      >
-        {/* Left & Right Cinematic Edge Fade Masks */}
-        <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-16 sm:w-36 md:w-52 bg-gradient-to-r from-brand-bg via-brand-bg/85 to-transparent z-20" />
-        <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-16 sm:w-36 md:w-52 bg-gradient-to-l from-brand-bg via-brand-bg/85 to-transparent z-20" />
-
-        {/* Moving Track */}
-        <div 
-          ref={trackRef}
-          className="flex will-change-transform items-stretch"
-          style={{ gap: `${gap}px` }}
-        >
-          {loopedProjects.map((project, idx) => {
-            const originalIndex = (idx % totalProjects) + 1;
-            const isLive = project.statusType === 'live' || (project.status || '').toLowerCase().includes('live');
-            const isDev = project.statusType === 'dev' || (project.status || '').toLowerCase().includes('dev');
-
-            return (
-              <div
-                key={`${project._id || project.id}-${idx}`}
-                style={{ width: `${cardWidth}px` }}
-                onClick={() => handleCardClick(project)}
-                className="flex-shrink-0 group/card relative bg-brand-card/85 border border-brand-border/80 dark:border-brand-border/40 rounded-3xl p-5 sm:p-6 flex flex-col justify-between transition-all duration-300 hover:border-brand-accent/60 hover:shadow-[0_16px_36px_-10px_rgba(0,255,136,0.20)] hover:-translate-y-1.5 text-left select-none backdrop-blur-md"
+          <div className="flex items-center gap-6">
+            {/* Project Navigation Switchers */}
+            <div className="flex items-center gap-2">
+              <button
+                onClick={handlePrev}
+                aria-label="Previous Project"
+                className="w-10 h-10 rounded-full border border-brand-border hover:border-brand-accent/50 bg-brand-card/70 hover:bg-brand-card flex items-center justify-center text-brand-textPrimary transition-colors cursor-pointer"
               >
-                {/* 1. PROJECT NUMBER + STATUS */}
-                <div className="flex justify-between items-center mb-3">
-                  <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase font-medium">
-                    0{originalIndex} / 0{totalProjects}
-                  </span>
+                <ChevronLeft size={18} />
+              </button>
+              <button
+                onClick={handleNext}
+                aria-label="Next Project"
+                className="w-10 h-10 rounded-full border border-brand-border hover:border-brand-accent/50 bg-brand-card/70 hover:bg-brand-card flex items-center justify-center text-brand-textPrimary transition-colors cursor-pointer"
+              >
+                <ChevronRight size={18} />
+              </button>
+            </div>
 
-                  {/* Status Indicator */}
-                  <div className={`flex items-center gap-1.5 font-mono text-[9px] px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${
-                    isLive 
-                      ? 'bg-brand-accent/10 border-brand-accent/40 text-brand-accent'
-                      : isDev
-                        ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
-                        : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
-                  }`}>
-                    <span className="relative flex h-1.5 w-1.5">
-                      {isLive && (
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-accent opacity-75" />
-                      )}
-                      <span className={`relative inline-flex rounded-full h-1.5 w-1.5 ${
-                        isLive ? 'bg-brand-accent' : isDev ? 'bg-blue-400' : 'bg-amber-400'
-                      }`} />
-                    </span>
-                    <span className="font-semibold">{project.status || 'Active'}</span>
-                  </div>
+            <div className="text-right">
+              <span className="editorial-number text-3xl sm:text-4xl font-light text-brand-textPrimary tracking-tight">
+                {currentIdx < 9 ? `0${currentIdx + 1}` : currentIdx + 1}
+              </span>
+              <span className="font-mono text-xs text-brand-textSecondary">
+                {' '}/ {projects.length < 9 ? `0${projects.length}` : projects.length}
+              </span>
+            </div>
+
+            <span className="editorial-number hidden sm:inline-block text-5xl sm:text-6xl font-light text-brand-textSecondary/25 tracking-tighter pl-4 border-l border-brand-border/40">
+              03
+            </span>
+          </div>
+        </div>
+
+        {/* =================================================================== */}
+        {/* MAIN EDITORIAL PROJECT HERO COMPOSITION */}
+        {/* =================================================================== */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center flex-1 my-auto">
+          
+          {/* Left Column: Project Details */}
+          <div className="lg:col-span-6 flex flex-col justify-center text-left">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={project.id || project._id || currentIdx}
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="flex flex-col items-start"
+              >
+                {/* Status Pill */}
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-brand-border/60 bg-brand-card/60 mb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                  <span className="font-mono text-[10px] uppercase tracking-widest text-brand-textSecondary font-semibold">
+                    {project.status || 'Active Project'}
+                  </span>
                 </div>
 
-                {/* 2. PROJECT NAME */}
-                <h3 className="font-serif text-xl sm:text-2xl font-bold text-brand-textPrimary group-hover/card:text-brand-accent transition-colors duration-200 mb-1.5 truncate">
+                {/* Big Bold Project Name */}
+                <h3 className="editorial-title text-3xl sm:text-5xl lg:text-6xl font-black text-brand-textPrimary tracking-tight uppercase leading-none mb-4">
                   {project.name}
                 </h3>
 
-                {/* 3. SHORT DESCRIPTION */}
-                <p className="text-xs text-brand-textSecondary leading-relaxed mb-4 line-clamp-2 font-normal">
+                {/* Description */}
+                <p className="font-sans text-sm sm:text-base text-brand-textSecondary leading-relaxed mb-6 font-normal max-w-xl">
                   {project.description}
                 </p>
 
-                {/* 4. 16:9 PROJECT PREVIEW */}
-                <div className="mb-4">
-                  <ProjectVisual 
-                    projectId={project.id} 
-                    name={project.name} 
-                    image={project.image} 
-                  />
-                </div>
-
-                {/* 5. TECHNOLOGY TAGS */}
-                <div className="flex flex-wrap gap-1.5 mb-4">
-                  {(project.tags || []).slice(0, 3).map((tag) => (
+                {/* Tags List */}
+                <div className="flex flex-wrap gap-2 mb-8">
+                  {tags.map((tag) => (
                     <span 
-                      key={tag} 
-                      className="font-mono text-[9px] text-brand-textSecondary bg-brand-tertiary px-2.5 py-0.5 rounded-md border border-brand-border/60"
+                      key={tag}
+                      className="font-mono text-xs px-3 py-1 rounded-md bg-brand-card border border-brand-border/50 text-brand-textSecondary"
                     >
                       {tag}
                     </span>
                   ))}
-                  {(project.tags || []).length > 3 && (
-                    <span className="font-mono text-[9px] text-brand-textSecondary/70 px-1 py-0.5">
-                      +{(project.tags || []).length - 3}
-                    </span>
-                  )}
                 </div>
 
-                {/* 6. EXPLORE PROJECT ↗ */}
-                <div className="pt-3 border-t border-brand-border/50 flex items-center justify-between">
-                  <span className="font-mono text-[10px] text-brand-accent font-semibold tracking-wider flex items-center gap-1 group-hover/card:text-brand-textPrimary transition-colors">
-                    EXPLORE PROJECT
-                    <ArrowUpRight size={13} className="group-hover/card:translate-x-1 group-hover/card:-translate-y-0.5 transition-transform duration-200" />
-                  </span>
-                  <span className="font-mono text-[9px] text-brand-textSecondary/70 uppercase">
-                    SPEC_VIEW
+                {/* Action Links */}
+                <div className="flex flex-wrap items-center gap-4">
+                  {onSelectProject && (
+                    <button
+                      onClick={() => onSelectProject(project)}
+                      className="flex items-center gap-2 bg-brand-accent text-brand-bg px-6 py-3 rounded-full font-semibold text-xs uppercase tracking-wider transition-all duration-200 hover:shadow-lg hover:shadow-brand-accent/20 cursor-pointer"
+                    >
+                      <span>Architecture Details</span>
+                      <Layers size={14} />
+                    </button>
+                  )}
+
+                  {project.demo && project.demo !== '#' && (
+                    <a
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 border border-brand-border hover:border-brand-accent/50 bg-brand-card/80 hover:bg-brand-card px-5 py-3 rounded-full font-mono text-xs text-brand-textPrimary transition-all cursor-pointer"
+                    >
+                      <span>Live Demo</span>
+                      <ArrowUpRight size={14} />
+                    </a>
+                  )}
+
+                  {project.github && project.github !== '#' && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-1.5 border border-brand-border hover:border-brand-accent/50 bg-brand-card/80 hover:bg-brand-card px-5 py-3 rounded-full font-mono text-xs text-brand-textPrimary transition-all cursor-pointer"
+                    >
+                      <Code size={14} />
+                      <span>Code</span>
+                    </a>
+                  )}
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* Right Column: Clean Project Media Treatment */}
+          <div className="lg:col-span-6 flex items-center justify-center">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={project.id || project._id || currentIdx}
+                initial={{ opacity: 0, scale: 0.96 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                className="relative w-full aspect-[16/10] max-w-[560px] rounded-2xl border border-brand-border/80 bg-brand-card overflow-hidden shadow-2xl flex flex-col justify-between p-6 group cursor-pointer"
+                onClick={() => onSelectProject && onSelectProject(project)}
+              >
+                {/* Tech grid texture background */}
+                <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/5 via-transparent to-transparent pointer-events-none" />
+
+                {/* Visual Header bar */}
+                <div className="relative z-10 flex items-center justify-between border-b border-brand-border/40 pb-3">
+                  <div className="flex items-center gap-2">
+                    <span className="w-2 h-2 rounded-full bg-brand-border" />
+                    <span className="font-mono text-[11px] text-brand-textSecondary tracking-wider">
+                      {project.id || 'project_module'}
+                    </span>
+                  </div>
+                  <span className="font-mono text-[10px] text-brand-accent tracking-widest uppercase">
+                    SYS_ACTIVE
                   </span>
                 </div>
-              </div>
-            );
-          })}
+
+                {/* Project Focus Preview Card */}
+                <div className="relative z-10 my-auto text-left py-6">
+                  <span className="font-mono text-[11px] text-brand-accent tracking-wider uppercase block mb-1">
+                    Problem & Architecture
+                  </span>
+                  <p className="font-sans text-xs sm:text-sm text-brand-textSecondary leading-relaxed line-clamp-3">
+                    {project.problem || project.solution || project.description}
+                  </p>
+                </div>
+
+                {/* Footer preview bar */}
+                <div className="relative z-10 flex items-center justify-between border-t border-brand-border/40 pt-3 text-[11px] font-mono text-brand-textSecondary">
+                  <span>Click to inspect module</span>
+                  <span className="text-brand-accent flex items-center gap-1 group-hover:translate-x-1 transition-transform">
+                    Expand ↗
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
+
+        {/* Bottom Project Strip Selector */}
+        <div className="flex items-center gap-3 overflow-x-auto py-4 border-t border-brand-border/40 scrollbar-none">
+          {projects.map((p, idx) => (
+            <button
+              key={p.id || p._id || idx}
+              onClick={() => setCurrentIdx(idx)}
+              className={`px-4 py-2 rounded-lg font-mono text-xs uppercase tracking-wider transition-all duration-200 whitespace-nowrap cursor-pointer ${
+                currentIdx === idx
+                  ? 'bg-brand-card text-brand-accent border border-brand-accent/40 font-bold'
+                  : 'text-brand-textSecondary hover:text-brand-textPrimary bg-brand-bg hover:bg-brand-card/50 border border-transparent'
+              }`}
+            >
+              {idx < 9 ? `0${idx + 1}` : idx + 1}. {p.name}
+            </button>
+          ))}
+        </div>
+
       </div>
     </section>
   );
