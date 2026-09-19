@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import ThemeToggle from './ThemeToggle';
 
 const sections = [
   { id: 'hero', number: '00', label: 'PORTFOLIO' },
@@ -49,9 +48,6 @@ export default function Navigation() {
           B.KULAL
         </button>
 
-        <div className="pointer-events-auto flex items-center gap-4">
-          <ThemeToggle />
-        </div>
       </header>
 
       {/* Discreet Minimal Edge Indicator (Right Edge on Desktop) */}

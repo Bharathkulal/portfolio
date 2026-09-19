@@ -200,7 +200,7 @@ export default function ProjectCard({ project, onClick, index = 0 }) {
       whileHover={{ y: -6 }}
       whileTap={{ scale: 0.98 }}
       onClick={onClick}
-      className="bg-brand-card/70 border border-brand-border/80 dark:border-brand-border/40 rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between p-5 sm:p-6 group transition-all duration-300 hover:border-brand-accent/60 hover:shadow-[0_12px_30px_-10px_rgba(0,255,136,0.18)] text-left"
+      className="bg-brand-card/70 border border-brand-border/80 rounded-2xl overflow-hidden cursor-pointer flex flex-col justify-between p-5 sm:p-6 group transition-all duration-300 hover:border-brand-accent/60 hover:shadow-[0_12px_30px_-10px_rgba(0,255,136,0.18)] text-left"
     >
       {/* 1. PROJECT NUMBER + STATUS */}
       <div className="flex justify-between items-center mb-3">
