@@ -8,6 +8,7 @@ import ProjectShowcase from './components/ProjectShowcase';
 import ProjectModal from './components/ProjectModal';
 import AISection from './components/AISection';
 import Contact from './components/Contact';
+import Loader from './components/Loader';
 import { projectsData } from './data/portfolioData';
 import { ThemeProvider } from './context/ThemeContext';
 
@@ -19,6 +20,15 @@ function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [dynProjects, setDynProjects] = useState([]);
   const [aboutInfo, setAboutInfo] = useState(null);
+  const [showLoader, setShowLoader] = useState(false);
+
+  useEffect(() => {
+    const hasVisited = sessionStorage.getItem('portfolioVisited');
+    if (!hasVisited) {
+      setShowLoader(true);
+      sessionStorage.setItem('portfolioVisited', 'true');
+    }
+  }, []);
 
   useEffect(() => {
     const loadData = async () => {
@@ -63,19 +73,29 @@ function PublicPortfolio() {
 
   return (
     <div className="relative min-h-screen bg-brand-bg text-brand-textPrimary font-sans selection:bg-brand-accent selection:text-brand-bg overflow-x-hidden">
+      {/* Loader */}
+      {showLoader && (
+        <Loader onComplete={() => setShowLoader(false)} />
+      )}
+
       {/* Subtle Grain Texture Overlay */}
       <div className="grain-overlay" />
 
-      {/* Minimal Navigation & Edge Progress Indicator */}
-      <Navigation />
+      {/* Fade In Navigation & Main Content after loader */}
+      <div
+        className="w-full transition-opacity duration-1000 ease-in-out"
+        style={{ opacity: showLoader ? 0 : 1 }}
+      >
+        {/* Minimal Navigation & Edge Progress Indicator */}
+        <Navigation />
 
-      {/* Minimal Scroll-Driven Editorial Sequence */}
-      <main className="w-full">
-        {/* Screen 00: Opening Title */}
-        <Hero />
+        {/* Minimal Scroll-Driven Editorial Sequence */}
+        <main className="w-full">
+          {/* Screen 00: Opening Title */}
+          <Hero />
 
-        {/* Screen 01: Three-Column Editorial About Me */}
-        <About aboutInfo={aboutInfo} />
+          {/* Screen 01: Three-Column Editorial About Me */}
+          <About aboutInfo={aboutInfo} />
 
         {/* Screen 02: Typography-Driven Skills */}
         <Skills />
@@ -92,6 +112,7 @@ function PublicPortfolio() {
         {/* Screen 05: Minimal Contact Screen */}
         <Contact />
       </main>
+      </div>
 
       {/* Dynamic Project Architecture Inspection Drawer */}
       {selectedProject && (
