@@ -38,21 +38,81 @@ export default function Certifications() {
     setSelectedCert(filteredCerts[prevIndex]);
   };
 
+  // Scroll Slider Logic
+  const sliderRef = React.useRef(null);
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const handleScrollSlider = () => {
+    if (sliderRef.current) {
+      const scrollLeft = sliderRef.current.scrollLeft;
+      const itemWidth = sliderRef.current.offsetWidth / (window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
+      const index = Math.round(scrollLeft / itemWidth);
+      setActiveIndex(index);
+    }
+  };
+
+  const slideNext = () => {
+    if (sliderRef.current) {
+      const itemWidth = sliderRef.current.offsetWidth / (window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
+      sliderRef.current.scrollBy({ left: itemWidth, behavior: 'smooth' });
+    }
+  };
+
+  const slidePrev = () => {
+    if (sliderRef.current) {
+      const itemWidth = sliderRef.current.offsetWidth / (window.innerWidth >= 1024 ? 3 : window.innerWidth >= 768 ? 2 : 1);
+      sliderRef.current.scrollBy({ left: -itemWidth, behavior: 'smooth' });
+    }
+  };
+
+  // Format number to have leading zero
+  const formatNum = (num) => (num + 1).toString().padStart(2, '0');
+
   return (
     <section id="certifications" className="w-full bg-brand-bg py-24 sm:py-32 border-t border-brand-border/40 relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         
-        {/* Section Header */}
-        <div className="mb-16">
-          <span className="font-mono text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-4 uppercase">
-            // CERTIFICATIONS
-          </span>
-          <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-textPrimary tracking-tight mb-4 uppercase">
-            Certificates &<br />Achievements
-          </h2>
-          <p className="text-brand-textSecondary text-base max-w-2xl font-normal leading-relaxed">
-            A collection of courses, programs and credentials I've completed to continuously upgrade my skills and knowledge.
-          </p>
+        {/* Section Header & Custom Navigation */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
+          <div>
+            <span className="font-mono text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-4 uppercase">
+              // CERTIFICATIONS
+            </span>
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-textPrimary tracking-tight mb-4 uppercase">
+              Certificates &<br />Achievements
+            </h2>
+            <p className="text-brand-textSecondary text-base max-w-2xl font-normal leading-relaxed">
+              A collection of courses, programs and credentials I've completed to continuously upgrade my skills and knowledge.
+            </p>
+          </div>
+
+          {/* Custom Slider Navigation */}
+          {filteredCerts.length > 0 && (
+            <div className="flex items-center gap-6 shrink-0">
+              <div className="flex gap-3">
+                <button 
+                  onClick={slidePrev}
+                  className="w-12 h-12 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textPrimary hover:bg-brand-border/40 hover:border-brand-textPrimary transition-all cursor-pointer"
+                >
+                  <ChevronLeft size={20} />
+                </button>
+                <button 
+                  onClick={slideNext}
+                  className="w-12 h-12 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textPrimary hover:bg-brand-border/40 hover:border-brand-textPrimary transition-all cursor-pointer"
+                >
+                  <ChevronRight size={20} />
+                </button>
+              </div>
+              <div className="font-mono flex items-baseline gap-2 select-none">
+                <span className="text-4xl font-light text-brand-textPrimary border-b-2 border-brand-textPrimary pb-1 leading-none">
+                  {formatNum(activeIndex)}
+                </span>
+                <span className="text-lg text-brand-textSecondary">
+                  / {formatNum(filteredCerts.length - 1)}
+                </span>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Filters */}
@@ -61,7 +121,11 @@ export default function Certifications() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setFilter(cat)}
+                onClick={() => {
+                  setFilter(cat);
+                  setActiveIndex(0);
+                  if (sliderRef.current) sliderRef.current.scrollLeft = 0;
+                }}
                 className={`font-mono text-xs px-4 py-2 rounded-full transition-all duration-300 border ${
                   filter === cat 
                     ? 'bg-brand-textPrimary text-brand-bg border-brand-textPrimary' 
@@ -74,8 +138,12 @@ export default function Certifications() {
           </div>
         )}
 
-        {/* Certificates Grid / Mobile Scroll */}
-        <div className="flex overflow-x-auto lg:grid lg:grid-cols-3 md:grid-cols-2 gap-6 snap-x snap-mandatory pb-8 lg:pb-0 hide-scrollbar -mx-6 px-6 lg:mx-0 lg:px-0">
+        {/* Certificates Grid / Slider */}
+        <div 
+          ref={sliderRef}
+          onScroll={handleScrollSlider}
+          className="flex overflow-x-auto gap-6 snap-x snap-mandatory pb-8 lg:pb-12 hide-scrollbar scroll-smooth"
+        >
           <AnimatePresence mode="popLayout">
             {filteredCerts.map((cert) => (
               <motion.div
@@ -86,7 +154,7 @@ export default function Certifications() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 onClick={() => setSelectedCert(cert)}
-                className="min-w-[85vw] sm:min-w-[45vw] lg:min-w-0 snap-center bg-brand-card border border-brand-border/80 rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-accent/5 hover:border-brand-accent/40 transition-all duration-300 flex flex-col"
+                className="w-[85vw] sm:w-[45vw] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-brand-card border border-brand-border/80 rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-accent/5 hover:border-brand-accent/40 transition-all duration-300 flex flex-col"
               >
                 {/* Image Preview Container */}
                 <div className="w-full aspect-[4/3] bg-brand-bg relative overflow-hidden border-b border-brand-border/40 flex items-center justify-center p-4">
