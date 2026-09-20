@@ -6,6 +6,7 @@ import About from './components/About';
 import Skills from './components/Skills';
 import ProjectShowcase from './components/ProjectShowcase';
 import ProjectModal from './components/ProjectModal';
+import Certifications from './components/Certifications';
 import AISection from './components/AISection';
 import Contact from './components/Contact';
 import Loader from './components/Loader';
@@ -105,6 +106,9 @@ function PublicPortfolio() {
           projects={dynProjects.length > 0 ? dynProjects : projectsData} 
           onSelectProject={setSelectedProject} 
         />
+
+        {/* Screen: Premium Certifications */}
+        <Certifications />
 
         {/* Screen 04: AI Focus & Methodology */}
         <AISection />

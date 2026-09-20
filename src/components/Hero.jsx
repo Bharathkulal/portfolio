@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import heroImg from '../assets/hero.png';
+import heroImg from '../assets/laptop-Hero.png';
 
 export default function Hero() {
   const shouldReduceMotion = useReducedMotion();
@@ -135,13 +135,12 @@ export default function Hero() {
           >
             <motion.div 
               animate={shouldReduceMotion ? {} : floatingAnimation}
-              className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px]"
+              className="relative w-full max-w-sm sm:max-w-md lg:max-w-lg rounded-2xl overflow-hidden shadow-2xl shadow-brand-border/40"
             >
-              <div className="absolute inset-0 rounded-full border border-brand-accent/30 shadow-[0_0_40px_rgba(74,222,128,0.1)]"></div>
               <img 
                 src={heroImg} 
                 alt="Bharath Kulal" 
-                className="w-full h-full object-cover rounded-full p-2 grayscale hover:grayscale-0 transition-all duration-700"
+                className="w-full h-auto object-cover brightness-50 grayscale hover:brightness-100 hover:grayscale-0 transition-all duration-700 cursor-pointer"
               />
             </motion.div>
           </motion.div>

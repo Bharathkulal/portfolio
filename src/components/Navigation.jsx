@@ -50,46 +50,7 @@ export default function Navigation() {
 
       </header>
 
-      {/* Discreet Minimal Edge Indicator (Right Edge on Desktop) */}
-      <nav 
-        aria-label="Editorial Section Navigation" 
-        className="hidden md:flex fixed right-8 top-1/2 -translate-y-1/2 z-40 flex-col items-end gap-3 pointer-events-none"
-      >
-        <div className="pointer-events-auto flex flex-col items-end gap-2.5 bg-brand-bg/40 backdrop-blur-sm p-2 rounded-full border border-brand-border/40">
-          {sections.map((sec, idx) => {
-            const isActive = activeIdx === idx;
-            return (
-              <button
-                key={sec.id}
-                onClick={() => scrollToSection(sec.id)}
-                title={sec.label}
-                className="group flex items-center gap-3 cursor-pointer py-0.5"
-              >
-                <span 
-                  className={`font-mono text-[10px] tracking-wider transition-all duration-300 opacity-0 group-hover:opacity-100 ${
-                    isActive ? 'text-brand-accent opacity-100 font-bold' : 'text-brand-textSecondary'
-                  }`}
-                >
-                  {sec.number}
-                </span>
-                <span 
-                  className={`block rounded-full transition-all duration-300 ${
-                    isActive 
-                      ? 'w-2 h-2 bg-brand-accent shadow-[0_0_8px_rgba(0,255,136,0.6)]' 
-                      : 'w-1.5 h-1.5 bg-brand-border hover:bg-brand-textSecondary'
-                  }`}
-                />
-              </button>
-            );
-          })}
-        </div>
-        
-        {/* Active Section Number */}
-        <div className="font-mono text-[10px] tracking-widest text-brand-textSecondary/70 pr-1 select-none">
-          <span className="text-brand-accent font-semibold">{sections[activeIdx].number}</span>
-          <span> / 05</span>
-        </div>
-      </nav>
+
     </>
   );
 }

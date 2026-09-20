@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import heroImg from '../assets/about-profile-clean.png';
 
 export default function About({ aboutInfo }) {
   const shouldReduceMotion = useReducedMotion();
@@ -8,7 +9,7 @@ export default function About({ aboutInfo }) {
   const name = aboutInfo?.name || 'Bharath Kulal';
   const role = aboutInfo?.education || 'BCA STUDENT & ASPIRING AI ENGINEER';
   const bio = aboutInfo?.bio || "I am a BCA student specializing in Artificial Intelligence & Machine Learning. Passionate about bridging the gap between intelligent algorithms and production web applications. Combining full-stack engineering with modern AI/ML frameworks to build robust, automated systems that solve real-world problems.";
-  const portraitImg = '/images/bharath-cutout.png';
+  const portraitImg = heroImg;
 
   // Subtle 5-10px mouse parallax on desktop
   const handleMouseMove = (e) => {
