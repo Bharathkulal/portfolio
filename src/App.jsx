@@ -21,15 +21,7 @@ function PublicPortfolio() {
   const [selectedProject, setSelectedProject] = useState(null);
   const [dynProjects, setDynProjects] = useState([]);
   const [aboutInfo, setAboutInfo] = useState(null);
-  const [showLoader, setShowLoader] = useState(false);
-
-  useEffect(() => {
-    const hasVisited = sessionStorage.getItem('portfolioVisited');
-    if (!hasVisited) {
-      setShowLoader(true);
-      sessionStorage.setItem('portfolioVisited', 'true');
-    }
-  }, []);
+  const [showLoader, setShowLoader] = useState(true);
 
   useEffect(() => {
     const loadData = async () => {
@@ -84,8 +76,7 @@ function PublicPortfolio() {
 
       {/* Fade In Navigation & Main Content after loader */}
       <div
-        className="w-full transition-opacity duration-1000 ease-in-out"
-        style={{ opacity: showLoader ? 0 : 1 }}
+        className="w-full"
       >
         {/* Minimal Navigation & Edge Progress Indicator */}
         <Navigation />
