@@ -69,20 +69,20 @@ export default function Certifications() {
   const formatNum = (num) => (num + 1).toString().padStart(2, '0');
 
   return (
-    <section id="certifications" className="w-full bg-brand-bg py-24 sm:py-32 border-t border-brand-border/40 relative">
+    <section id="certifications" className="w-full bg-[#080808] text-[#F5F3EF] py-24 sm:py-32 border-t border-white/[0.06] relative">
       <div className="max-w-7xl mx-auto px-6 sm:px-10 lg:px-16">
         
         {/* Section Header & Custom Navigation */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-16">
           <div>
-            <span className="font-mono text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-4 uppercase">
-              // CERTIFICATIONS
+            <span className="font-mono text-xs text-[#FF941F] tracking-[0.25em] font-semibold block mb-4 uppercase">
+              // CERTIFICATIONS & ACHIEVEMENTS
             </span>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-brand-textPrimary tracking-tight mb-4 uppercase">
-              Certificates &<br />Achievements
+            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black text-[#F5F3EF] tracking-tight mb-4 uppercase">
+              Certificates &<br />Credentials
             </h2>
-            <p className="text-brand-textSecondary text-base max-w-2xl font-normal leading-relaxed">
-              A collection of courses, programs and credentials I've completed to continuously upgrade my skills and knowledge.
+            <p className="text-[#929292] text-base max-w-2xl font-normal leading-relaxed">
+              Curated verified certifications and specializations in AI, Generative Models, Cloud, and Software Development.
             </p>
           </div>
 
@@ -92,22 +92,22 @@ export default function Certifications() {
               <div className="flex gap-3">
                 <button 
                   onClick={slidePrev}
-                  className="w-12 h-12 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textPrimary hover:bg-brand-border/40 hover:border-brand-textPrimary transition-all cursor-pointer"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[#F5F3EF] hover:bg-white/[0.05] hover:border-[#FF941F]/60 transition-all cursor-pointer"
                 >
                   <ChevronLeft size={20} />
                 </button>
                 <button 
                   onClick={slideNext}
-                  className="w-12 h-12 rounded-full border border-brand-border/80 flex items-center justify-center text-brand-textPrimary hover:bg-brand-border/40 hover:border-brand-textPrimary transition-all cursor-pointer"
+                  className="w-12 h-12 rounded-full border border-white/10 flex items-center justify-center text-[#F5F3EF] hover:bg-white/[0.05] hover:border-[#FF941F]/60 transition-all cursor-pointer"
                 >
                   <ChevronRight size={20} />
                 </button>
               </div>
               <div className="font-mono flex items-baseline gap-2 select-none">
-                <span className="text-4xl font-light text-brand-textPrimary border-b-2 border-brand-textPrimary pb-1 leading-none">
+                <span className="text-4xl font-light text-[#F5F3EF] border-b-2 border-[#FF941F] pb-1 leading-none">
                   {formatNum(activeIndex)}
                 </span>
-                <span className="text-lg text-brand-textSecondary">
+                <span className="text-lg text-[#929292]">
                   / {formatNum(filteredCerts.length - 1)}
                 </span>
               </div>
@@ -128,8 +128,8 @@ export default function Certifications() {
                 }}
                 className={`font-mono text-xs px-4 py-2 rounded-full transition-all duration-300 border ${
                   filter === cat 
-                    ? 'bg-brand-textPrimary text-brand-bg border-brand-textPrimary' 
-                    : 'bg-transparent text-brand-textSecondary border-brand-border/60 hover:border-brand-accent hover:text-brand-textPrimary'
+                    ? 'bg-[#FF941F] text-[#080808] border-[#FF941F] font-bold' 
+                    : 'bg-[#111111] text-[#929292] border-white/10 hover:border-[#FF941F]/50 hover:text-[#F5F3EF]'
                 }`}
               >
                 {cat}
@@ -154,10 +154,10 @@ export default function Certifications() {
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3 }}
                 onClick={() => setSelectedCert(cert)}
-                className="w-[85vw] sm:w-[45vw] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-brand-card border border-brand-border/80 rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1.5 hover:shadow-xl hover:shadow-brand-accent/5 hover:border-brand-accent/40 transition-all duration-300 flex flex-col"
+                className="w-[85vw] sm:w-[45vw] lg:w-[calc(33.333%-16px)] shrink-0 snap-start bg-[#111111] border border-white/[0.08] rounded-2xl overflow-hidden cursor-pointer group hover:-translate-y-1.5 hover:shadow-2xl hover:shadow-[#FF941F]/10 hover:border-[#FF941F]/50 transition-all duration-300 flex flex-col"
               >
                 {/* Image Preview Container */}
-                <div className="w-full aspect-[4/3] bg-brand-bg relative overflow-hidden border-b border-brand-border/40 flex items-center justify-center p-4">
+                <div className="w-full aspect-[4/3] bg-[#0c0c0c] relative overflow-hidden border-b border-white/[0.06] flex items-center justify-center p-4">
                   {cert.image ? (
                     <img 
                       src={cert.image} 
@@ -165,37 +165,37 @@ export default function Certifications() {
                       className="w-full h-full object-contain filter transition-transform duration-500 group-hover:scale-105"
                     />
                   ) : (
-                    <div className="text-brand-textSecondary/40 font-mono text-xs uppercase flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-brand-border animate-pulse" />
+                    <div className="text-[#929292]/40 font-mono text-xs uppercase flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-white/20 animate-pulse" />
                       Pending Upload
                     </div>
                   )}
                 </div>
 
                 {/* Content */}
-                <div className="p-6 flex flex-col flex-grow">
-                  <h3 className="font-sans text-xl font-bold text-brand-textPrimary mb-1 group-hover:text-brand-accent transition-colors">
+                <div className="p-6 flex flex-col flex-grow text-left">
+                  <h3 className="font-sans text-xl font-bold text-[#F5F3EF] mb-1 group-hover:text-[#FF941F] transition-colors">
                     {cert.title}
                   </h3>
-                  <p className="text-brand-textSecondary text-sm mb-4">
+                  <p className="text-[#929292] text-sm mb-4">
                     {cert.issuer}
                   </p>
 
                   <div className="mt-auto space-y-3">
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-[9px] text-brand-textSecondary bg-brand-bg px-2 py-1 rounded border border-brand-border/60">
+                      <span className="font-mono text-[9px] text-[#929292] bg-[#080808] px-2 py-1 rounded border border-white/10">
                         {cert.category}
                       </span>
-                      <span className="font-mono text-[9px] text-brand-textSecondary bg-brand-bg px-2 py-1 rounded border border-brand-border/60">
+                      <span className="font-mono text-[9px] text-[#929292] bg-[#080808] px-2 py-1 rounded border border-white/10">
                         {cert.date}
                       </span>
                     </div>
 
-                    <div className="pt-4 border-t border-brand-border/50 flex items-center justify-between">
-                      <span className="font-mono text-[10px] text-brand-accent font-semibold tracking-wider flex items-center gap-1">
-                        VIEW CERTIFICATE
+                    <div className="pt-4 border-t border-white/[0.06] flex items-center justify-between">
+                      <span className="font-mono text-[10px] text-[#FF941F] font-semibold tracking-wider flex items-center gap-1">
+                        VIEW CREDENTIAL
                       </span>
-                      <ArrowRight size={14} className="text-brand-textSecondary group-hover:text-brand-accent group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight size={14} className="text-[#929292] group-hover:text-[#FF941F] group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>
                 </div>
@@ -212,31 +212,31 @@ export default function Certifications() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[100] flex items-center justify-center bg-brand-textPrimary/90 backdrop-blur-sm p-4 sm:p-8"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 backdrop-blur-md p-4 sm:p-8"
             onClick={() => setSelectedCert(null)}
           >
             {/* Close Button */}
             <button 
-              className="absolute top-6 right-6 p-2 bg-brand-bg text-brand-textPrimary rounded-full hover:bg-brand-accent hover:text-white transition-colors z-50 shadow-lg"
+              className="absolute top-6 right-6 p-2.5 bg-[#111111] text-[#F5F3EF] rounded-full border border-white/15 hover:border-[#FF941F] hover:text-[#FF941F] transition-colors z-50 shadow-xl cursor-pointer"
               onClick={() => setSelectedCert(null)}
             >
-              <X size={24} />
+              <X size={20} />
             </button>
 
-            {/* Navigation Buttons (Desktop mostly) */}
+            {/* Navigation Buttons (Desktop) */}
             {filteredCerts.length > 1 && (
               <>
                 <button 
                   onClick={handlePrev}
-                  className="hidden sm:flex absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-brand-bg text-brand-textPrimary rounded-full hover:bg-brand-accent hover:text-white transition-colors z-50 shadow-lg"
+                  className="hidden sm:flex absolute left-6 top-1/2 -translate-y-1/2 p-3 bg-[#111111] text-[#F5F3EF] rounded-full border border-white/15 hover:border-[#FF941F] hover:text-[#FF941F] transition-colors z-50 shadow-xl cursor-pointer"
                 >
-                  <ChevronLeft size={24} />
+                  <ChevronLeft size={22} />
                 </button>
                 <button 
                   onClick={handleNext}
-                  className="hidden sm:flex absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-brand-bg text-brand-textPrimary rounded-full hover:bg-brand-accent hover:text-white transition-colors z-50 shadow-lg"
+                  className="hidden sm:flex absolute right-6 top-1/2 -translate-y-1/2 p-3 bg-[#111111] text-[#F5F3EF] rounded-full border border-white/15 hover:border-[#FF941F] hover:text-[#FF941F] transition-colors z-50 shadow-xl cursor-pointer"
                 >
-                  <ChevronRight size={24} />
+                  <ChevronRight size={22} />
                 </button>
               </>
             )}
@@ -247,36 +247,36 @@ export default function Certifications() {
               exit={{ scale: 0.95, opacity: 0, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
               onClick={(e) => e.stopPropagation()}
-              className="w-full max-w-5xl bg-brand-bg rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
+              className="w-full max-w-5xl bg-[#111111] border border-white/15 rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90vh]"
             >
               {/* Modal Image Area */}
-              <div className="w-full flex-grow relative bg-[#EAF4FB] flex items-center justify-center p-4 sm:p-8 min-h-[40vh] overflow-y-auto">
+              <div className="w-full flex-grow relative bg-[#080808] flex items-center justify-center p-4 sm:p-8 min-h-[40vh] overflow-y-auto">
                 {selectedCert.image ? (
                   <img 
                     src={selectedCert.image} 
                     alt={selectedCert.title} 
-                    className="max-w-full max-h-full object-contain shadow-lg"
+                    className="max-w-full max-h-full object-contain shadow-2xl rounded-lg"
                   />
                 ) : (
-                  <div className="text-brand-textSecondary font-mono text-sm uppercase flex flex-col items-center gap-3">
-                    <span className="w-4 h-4 rounded-full bg-brand-border animate-pulse" />
+                  <div className="text-[#929292] font-mono text-sm uppercase flex flex-col items-center gap-3">
+                    <span className="w-4 h-4 rounded-full bg-white/20 animate-pulse" />
                     Awaiting Certificate Image
                   </div>
                 )}
               </div>
 
               {/* Modal Details Area */}
-              <div className="bg-brand-card p-6 sm:p-8 border-t border-brand-border/60 shrink-0">
+              <div className="bg-[#111111] p-6 sm:p-8 border-t border-white/10 shrink-0 text-left">
                 <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
                   <div>
-                    <h3 className="text-2xl sm:text-3xl font-bold text-brand-textPrimary mb-2">
+                    <h3 className="text-2xl sm:text-3xl font-bold text-[#F5F3EF] mb-2">
                       {selectedCert.title}
                     </h3>
-                    <p className="text-brand-textSecondary text-sm sm:text-base">
-                      Issued by <span className="font-semibold text-brand-textPrimary">{selectedCert.issuer}</span> • {selectedCert.date}
+                    <p className="text-[#929292] text-sm sm:text-base">
+                      Issued by <span className="font-semibold text-[#F5F3EF]">{selectedCert.issuer}</span> • {selectedCert.date}
                     </p>
                     {selectedCert.credentialId && (
-                      <p className="font-mono text-[10px] sm:text-xs text-brand-textSecondary mt-2 bg-brand-bg inline-block px-2 py-1 rounded border border-brand-border/40">
+                      <p className="font-mono text-[10px] sm:text-xs text-[#929292] mt-2 bg-[#080808] inline-block px-3 py-1 rounded border border-white/10">
                         ID: {selectedCert.credentialId}
                       </p>
                     )}
@@ -287,10 +287,10 @@ export default function Certifications() {
                       href={selectedCert.verificationUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-6 py-3 bg-brand-textPrimary text-brand-bg font-medium rounded-full hover:bg-brand-accent transition-colors self-start sm:self-auto shrink-0"
+                      className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF941F] text-[#080808] font-bold text-xs uppercase tracking-wider rounded-full hover:bg-[#FFB356] transition-colors self-start sm:self-auto shrink-0 shadow-lg shadow-[#FF941F]/20"
                     >
                       Verify Credential
-                      <ExternalLink size={16} />
+                      <ExternalLink size={15} />
                     </a>
                   )}
                 </div>

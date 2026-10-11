@@ -3,16 +3,16 @@ import React, { createContext, useContext, useState, useEffect } from 'react';
 const ThemeContext = createContext();
 
 export function ThemeProvider({ children }) {
-  const theme = 'light';
+  const theme = 'dark';
   
   useEffect(() => {
     const root = document.documentElement;
-    root.setAttribute('data-theme', theme);
-    root.classList.remove('dark');
+    root.setAttribute('data-theme', 'dark');
+    root.classList.add('dark');
   }, []);
 
   const toggleTheme = () => {
-    // No-op since we are enforcing light theme globally
+    // Cinematic dark is enforced globally
   };
 
   return (

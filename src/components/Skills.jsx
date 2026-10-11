@@ -285,24 +285,24 @@ export default function Skills() {
                     setHoveredTech(null);
                     setIsHoveringAny(false);
                   }}
-                  className={`pointer-events-auto flex items-center gap-3.5 bg-brand-card/75 border rounded-xl h-[56px] px-5 transition-all duration-300 group/card cursor-pointer ${depthOpacity} ${
+                  className={`pointer-events-auto flex items-center gap-3.5 bg-[#111111]/90 border rounded-xl h-[56px] px-5 transition-all duration-300 group/card cursor-pointer ${depthOpacity} ${
                     isHovered 
-                      ? 'border-brand-accent/60 shadow-[0_0_15px_-2px_rgba(0,255,136,0.15)] bg-brand-card/90 opacity-100 scale-105' 
+                      ? 'border-[#FF941F]/70 shadow-[0_0_20px_-2px_rgba(255,148,31,0.35)] bg-[#161616] opacity-100 scale-105' 
                       : isDimmed 
-                        ? 'opacity-40 border-brand-border/20' 
-                        : 'border-brand-border/40 hover:border-brand-accent/30'
+                        ? 'opacity-35 border-white/[0.04]' 
+                        : 'border-white/[0.08] hover:border-[#FF941F]/40'
                   }`}
                 >
-                  <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-tertiary/45 border border-brand-border/30 group-hover/card:scale-105 transition-transform duration-300 text-brand-textSecondary group-hover/card:text-brand-accent">
+                  <div className="flex items-center justify-center w-7 h-7 rounded-lg bg-black/50 border border-white/[0.06] group-hover/card:scale-105 transition-transform duration-300 text-[#929292] group-hover/card:text-[#FF941F]">
                     {getTechIcon(item.name)}
                   </div>
-                  <span className="font-sans font-medium text-xs text-brand-textSecondary group-hover/card:text-brand-textPrimary transition-colors duration-300">
+                  <span className="font-sans font-medium text-xs text-[#929292] group-hover/card:text-[#F5F3EF] transition-colors duration-300">
                     {item.name}
                   </span>
 
                   {/* Tooltip containing category indicator on Hover */}
                   {isHovered && (
-                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-black/90 border border-brand-accent/30 text-[9px] tracking-widest font-mono text-brand-accent uppercase shadow-lg select-none whitespace-nowrap z-50 pointer-events-none">
+                    <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-2.5 py-1 rounded bg-black/95 border border-[#FF941F]/40 text-[9px] tracking-widest font-mono text-[#FF941F] uppercase shadow-xl select-none whitespace-nowrap z-50 pointer-events-none">
                       {item.catNum} {item.catName}
                     </div>
                   )}
@@ -320,45 +320,36 @@ export default function Skills() {
     : null;
 
   return (
-    <section id="skills" className="py-24 bg-brand-bg relative overflow-hidden">
-      {/* Background decoration line */}
-      <div className="absolute top-0 right-1/4 w-px h-full bg-brand-border/5 pointer-events-none" />
-
-      <div className="w-full px-6 sm:px-12 lg:px-20 mx-auto relative z-10 text-left">
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="flex flex-col mb-16"
-        >
-          {/* Section Header */}
-          <motion.div variants={itemVariants} className="max-w-2xl">
-            <div className="flex items-center gap-4 mb-4">
-              <span className="font-mono text-xs text-brand-accent tracking-widest uppercase">
-                02 / WHAT I WORK WITH
-              </span>
-              <div className="h-px flex-grow bg-brand-border/40" />
-            </div>
-            <h2 className="font-serif text-4xl md:text-6xl font-bold text-brand-textPrimary mt-4 mb-6 leading-tight tracking-tight">
-              What I work with.
+    <section id="skills" className="editorial-section min-h-screen w-full bg-[#080808] text-[#F5F3EF] relative flex flex-col justify-between py-24 px-6 sm:px-10 lg:px-16 border-t border-white/[0.06]">
+      <div className="w-full max-w-7xl mx-auto flex flex-col justify-between">
+        
+        {/* Section Header */}
+        <div className="flex items-end justify-between border-b border-white/[0.08] pb-6 mb-12 text-left">
+          <div>
+            <span className="editorial-tag text-xs text-[#FF941F] tracking-[0.25em] font-semibold block mb-2">
+              // TECHNICAL CAPABILITIES
+            </span>
+            <h2 className="editorial-title text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#F5F3EF] uppercase leading-none">
+              SKILLS
             </h2>
-            <p className="font-sans text-sm md:text-base text-brand-textSecondary leading-relaxed">
-              Technologies and tools I use to build intelligent, real-world products.
-            </p>
-          </motion.div>
-        </motion.div>
+          </div>
+
+          <span className="editorial-number text-5xl sm:text-7xl font-light text-[#929292]/25 tracking-tighter">
+            02
+          </span>
+        </div>
+
       </div>
 
       {/* Orbit Visualization Canvas Container */}
-      <div className="relative w-full flex justify-center items-center py-20 overflow-hidden min-h-[500px] md:min-h-[720px] select-none">
+      <div className="relative w-full flex justify-center items-center py-10 overflow-hidden min-h-[500px] md:min-h-[720px] select-none my-auto">
         
         {/* Responsive scaling wrapper */}
         <div className="relative flex items-center justify-center w-[720px] h-[720px] scale-[0.45] xs:scale-[0.55] sm:scale-[0.7] md:scale-[0.85] lg:scale-100 transition-transform duration-500">
           
           {/* Central AI/ML core with dynamic text dashboard */}
-          <div className="absolute w-44 h-44 rounded-full bg-brand-card/95 border-2 border-brand-accent/30 shadow-[0_0_35px_rgba(0,255,136,0.06)] z-50 flex flex-col justify-center items-center text-center p-4">
-            <div className="absolute inset-0 bg-brand-accent/5 rounded-full blur-xl animate-pulse pointer-events-none" />
+          <div className="absolute w-44 h-44 rounded-full bg-[#111111] border-2 border-[#FF941F]/40 shadow-[0_0_35px_rgba(255,148,31,0.15)] z-50 flex flex-col justify-center items-center text-center p-4">
+            <div className="absolute inset-0 bg-[#FF941F]/10 rounded-full blur-xl animate-pulse pointer-events-none" />
             
             {activeTechDetails ? (
               <motion.div 
@@ -366,22 +357,22 @@ export default function Skills() {
                 animate={{ opacity: 1, scale: 1 }}
                 className="z-10 font-sans"
               >
-                <span className="font-mono text-[9px] tracking-widest text-brand-accent block mb-1">
+                <span className="font-mono text-[9px] tracking-widest text-[#FF941F] block mb-1">
                   {activeTechDetails.catNum} // {activeTechDetails.catName.toUpperCase()}
                 </span>
-                <span className="text-lg font-bold text-brand-textPrimary block truncate max-w-[130px]">
+                <span className="text-lg font-bold text-[#F5F3EF] block truncate max-w-[130px]">
                   {activeTechDetails.name}
                 </span>
-                <span className="font-mono text-[8px] text-brand-textSecondary block mt-1 tracking-wide animate-pulse">
+                <span className="font-mono text-[8px] text-[#929292] block mt-1 tracking-wide animate-pulse">
                   SYSTEM_FOCUSED
                 </span>
               </motion.div>
             ) : (
               <div className="z-10 font-sans">
-                <span className="text-xl font-bold tracking-wider text-brand-accent block">
+                <span className="text-xl font-bold tracking-wider text-[#FF941F] block">
                   AI / ML
                 </span>
-                <span className="font-mono text-[9px] text-brand-textSecondary tracking-widest uppercase block mt-1">
+                <span className="font-mono text-[9px] text-[#929292] tracking-widest uppercase block mt-1">
                   BHARATH KULAL
                 </span>
               </div>

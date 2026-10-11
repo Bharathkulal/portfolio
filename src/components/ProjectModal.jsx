@@ -112,7 +112,7 @@ export default function ProjectModal({ project, onClose }) {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.3 }}
           onClick={onClose}
-          className="fixed inset-0 bg-brand-bg/85 backdrop-blur-md"
+          className="fixed inset-0 bg-black/90 backdrop-blur-md"
         />
 
         {/* Modal Window Container - Native Mobile Sheet on Mobile, Centered Modal on Desktop */}
@@ -121,32 +121,26 @@ export default function ProjectModal({ project, onClose }) {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 50, scale: 0.98 }}
           transition={{ duration: 0.35, ease: [0.215, 0.61, 0.355, 1] }}
-          className="w-full max-w-4xl h-[92vh] sm:h-[86vh] bg-brand-card border border-brand-border/90 rounded-t-[28px] sm:rounded-3xl overflow-hidden shadow-2xl relative flex flex-col z-10"
+          className="w-full max-w-4xl h-[92vh] sm:h-[86vh] bg-[#111111] text-[#F5F3EF] border border-white/15 rounded-t-[28px] sm:rounded-3xl overflow-hidden shadow-2xl relative flex flex-col z-10"
         >
           {/* Header */}
-          <div className="flex justify-between items-center px-5 sm:px-8 py-4 border-b border-brand-border bg-brand-card/95 backdrop-blur-md sticky top-0 z-20">
+          <div className="flex justify-between items-center px-5 sm:px-8 py-4 border-b border-white/[0.08] bg-[#111111]/95 backdrop-blur-md sticky top-0 z-20">
             <div className="flex items-center gap-3">
               <motion.button 
                 whileTap={{ scale: 0.92 }}
                 onClick={onClose}
-                className="flex items-center gap-1.5 text-xs font-mono text-brand-textSecondary hover:text-brand-accent bg-brand-tertiary px-3 py-1.5 rounded-full border border-brand-border transition-colors sm:hidden"
+                className="flex items-center gap-1.5 text-xs font-mono text-[#929292] hover:text-[#FF941F] bg-[#181818] px-3 py-1.5 rounded-full border border-white/10 transition-colors sm:hidden"
               >
                 <ArrowLeft size={14} />
                 <span>Back</span>
               </motion.button>
 
-              <span className="font-mono text-xs text-brand-accent font-bold uppercase tracking-wider hidden sm:inline-block">
+              <span className="font-mono text-xs text-[#FF941F] font-bold uppercase tracking-wider hidden sm:inline-block">
                 SPEC_ID // {project.id?.toUpperCase()}
               </span>
 
-              <div className={`flex items-center gap-1.5 font-mono text-[9px] px-2.5 py-0.5 rounded-full border uppercase tracking-wider ${
-                isLive 
-                  ? 'bg-brand-accent/10 border-brand-accent/40 text-brand-accent'
-                  : isDev
-                    ? 'bg-blue-500/10 border-blue-500/30 text-blue-400'
-                    : 'bg-amber-500/10 border-amber-500/30 text-amber-400'
-              }`}>
-                <span className={`w-1.5 h-1.5 rounded-full ${isLive ? 'bg-brand-accent animate-pulse' : 'bg-current'}`} />
+              <div className="flex items-center gap-1.5 font-mono text-[9px] px-2.5 py-0.5 rounded-full border border-[#FF941F]/30 bg-[#FF941F]/10 text-[#FF941F] uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#FF941F] animate-pulse" />
                 <span>{project.status || 'Active'}</span>
               </div>
             </div>
@@ -154,7 +148,7 @@ export default function ProjectModal({ project, onClose }) {
             <motion.button 
               whileTap={{ scale: 0.92 }}
               onClick={onClose}
-              className="text-brand-textSecondary hover:text-brand-accent bg-brand-tertiary p-2 rounded-full border border-brand-border hover:border-brand-accent/40 transition-colors"
+              className="text-[#929292] hover:text-[#FF941F] bg-[#181818] p-2 rounded-full border border-white/10 hover:border-[#FF941F]/40 transition-colors cursor-pointer"
               aria-label="Close Modal"
             >
               <X size={16} />
@@ -171,32 +165,32 @@ export default function ProjectModal({ project, onClose }) {
 
             {/* Title & Short Summary */}
             <div>
-              <h2 className="font-serif text-2xl sm:text-4xl font-extrabold text-brand-textPrimary mb-2">
+              <h2 className="editorial-title text-2xl sm:text-4xl font-extrabold text-[#F5F3EF] mb-2 uppercase">
                 {project.name}
               </h2>
-              <p className="text-brand-textSecondary text-xs sm:text-sm leading-relaxed max-w-2xl font-normal">
+              <p className="text-[#929292] text-xs sm:text-sm leading-relaxed max-w-2xl font-normal">
                 {project.description}
               </p>
             </div>
 
             {/* Technical Specs Columns: Problem & Solution */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
-              <div className="bg-brand-tertiary/40 border border-brand-border/80 rounded-2xl p-4 sm:p-5">
-                <h4 className="font-mono text-[10px] text-brand-accent tracking-widest uppercase mb-2 font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent" />
+              <div className="bg-[#161616] border border-white/[0.08] rounded-2xl p-4 sm:p-5">
+                <h4 className="font-mono text-[10px] text-[#FF941F] tracking-widest uppercase mb-2 font-bold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF941F]" />
                   01 // PROBLEM STATEMENT
                 </h4>
-                <p className="text-brand-textSecondary text-xs leading-relaxed font-normal">
+                <p className="text-[#929292] text-xs leading-relaxed font-normal">
                   {project.problem || project.description}
                 </p>
               </div>
 
-              <div className="bg-brand-tertiary/40 border border-brand-border/80 rounded-2xl p-4 sm:p-5">
-                <h4 className="font-mono text-[10px] text-brand-blue tracking-widest uppercase mb-2 font-bold flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-blue" />
+              <div className="bg-[#161616] border border-white/[0.08] rounded-2xl p-4 sm:p-5">
+                <h4 className="font-mono text-[10px] text-[#FF941F] tracking-widest uppercase mb-2 font-bold flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF941F]" />
                   02 // SOLUTION ARCHITECTURE
                 </h4>
-                <p className="text-brand-textSecondary text-xs leading-relaxed font-normal">
+                <p className="text-[#929292] text-xs leading-relaxed font-normal">
                   {project.solution || project.description}
                 </p>
               </div>
@@ -205,14 +199,14 @@ export default function ProjectModal({ project, onClose }) {
             {/* Features & Learnings */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6">
               {project.features && project.features.length > 0 && (
-                <div className="bg-brand-tertiary/40 border border-brand-border/80 rounded-2xl p-4 sm:p-5">
-                  <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3 font-semibold">
+                <div className="bg-[#161616] border border-white/[0.08] rounded-2xl p-4 sm:p-5">
+                  <h4 className="font-mono text-[10px] text-[#929292] tracking-widest uppercase mb-3 font-semibold">
                     03 // KEY FEATURES
                   </h4>
-                  <ul className="text-brand-textSecondary text-xs leading-relaxed flex flex-col gap-2">
+                  <ul className="text-[#929292] text-xs leading-relaxed flex flex-col gap-2">
                     {project.features.filter(f => !f.includes('[ADD')).map((feat, idx) => (
                       <li key={idx} className="flex gap-2.5 items-start">
-                        <CheckCircle2 size={13} className="text-brand-accent shrink-0 mt-0.5" />
+                        <CheckCircle2 size={13} className="text-[#FF941F] shrink-0 mt-0.5" />
                         <span>{feat}</span>
                       </li>
                     ))}
@@ -221,11 +215,11 @@ export default function ProjectModal({ project, onClose }) {
               )}
 
               {project.learned && (
-                <div className="bg-brand-tertiary/40 border border-brand-border/80 rounded-2xl p-4 sm:p-5">
-                  <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3 font-semibold">
+                <div className="bg-[#161616] border border-white/[0.08] rounded-2xl p-4 sm:p-5">
+                  <h4 className="font-mono text-[10px] text-[#929292] tracking-widest uppercase mb-3 font-semibold">
                     04 // ACQUIRED CAPABILITIES
                   </h4>
-                  <p className="text-brand-textSecondary text-xs leading-relaxed font-normal">
+                  <p className="text-[#929292] text-xs leading-relaxed font-normal">
                     {project.learned}
                   </p>
                 </div>
@@ -234,12 +228,12 @@ export default function ProjectModal({ project, onClose }) {
 
             {/* Technology tags */}
             <div>
-              <h4 className="font-mono text-[10px] text-brand-textSecondary tracking-widest uppercase mb-3 font-semibold">
+              <h4 className="font-mono text-[10px] text-[#929292] tracking-widest uppercase mb-3 font-semibold">
                 05 // SYSTEM TECHNOLOGIES
               </h4>
               <div className="flex flex-wrap gap-2">
                 {(project.tags || []).map(tag => (
-                  <span key={tag} className="font-mono text-xs text-brand-textPrimary bg-brand-tertiary border border-brand-border/80 px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
+                  <span key={tag} className="font-mono text-xs text-[#F5F3EF] bg-[#181818] border border-white/10 px-3 py-1.5 rounded-xl flex items-center gap-2 shadow-sm">
                     {getSkillIcon(tag)}
                     <span>{tag}</span>
                   </span>
@@ -249,7 +243,7 @@ export default function ProjectModal({ project, onClose }) {
           </div>
 
           {/* Footer controls - Fixed Bottom Actions */}
-          <div className="border-t border-brand-border px-5 sm:px-8 py-4 bg-brand-card flex flex-wrap gap-3 items-center justify-between sticky bottom-0 z-20">
+          <div className="border-t border-white/[0.08] px-5 sm:px-8 py-4 bg-[#111111] flex flex-wrap gap-3 items-center justify-between sticky bottom-0 z-20">
             <div className="flex flex-wrap gap-3 w-full sm:w-auto">
               {project.demo && !project.demo.includes('ADD') ? (
                 <motion.a 
@@ -257,14 +251,14 @@ export default function ProjectModal({ project, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.96 }}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-6 rounded-full bg-brand-accent text-brand-bg font-bold hover:bg-white transition-all shadow-md shadow-brand-accent/20"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-6 rounded-full bg-[#FF941F] text-[#080808] font-bold hover:bg-[#FFB356] transition-all shadow-md shadow-[#FF941F]/20"
                 >
                   <ArrowUpRight size={14} /> 
                   LIVE DEPLOYMENT
                 </motion.a>
               ) : (
-                <span className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-5 rounded-full bg-brand-accent/10 border border-brand-accent/30 text-brand-accent font-semibold">
-                  <span className="w-1.5 h-1.5 rounded-full bg-brand-accent animate-pulse" />
+                <span className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-5 rounded-full bg-[#FF941F]/10 border border-[#FF941F]/30 text-[#FF941F] font-semibold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF941F] animate-pulse" />
                   SYSTEM ACTIVE
                 </span>
               )}
@@ -275,7 +269,7 @@ export default function ProjectModal({ project, onClose }) {
                   target="_blank"
                   rel="noopener noreferrer"
                   whileTap={{ scale: 0.96 }}
-                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-5 rounded-full border border-brand-border bg-brand-tertiary text-brand-textPrimary hover:border-brand-accent/50 transition-colors"
+                  className="flex-1 sm:flex-initial flex items-center justify-center gap-2 text-xs font-mono py-2.5 px-5 rounded-full border border-white/15 bg-[#181818] text-[#F5F3EF] hover:border-[#FF941F]/50 transition-colors"
                 >
                   <svg className="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
                     <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -285,7 +279,7 @@ export default function ProjectModal({ project, onClose }) {
               )}
             </div>
 
-            <span className="font-mono text-[9px] text-brand-textSecondary/70 hidden sm:inline-block">
+            <span className="font-mono text-[9px] text-[#929292] hidden sm:inline-block">
               SYSTEM_VER // 3.0.0_STABLE
             </span>
           </div>

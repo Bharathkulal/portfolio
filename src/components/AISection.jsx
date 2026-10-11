@@ -21,22 +21,22 @@ export default function AISection() {
   return (
     <section 
       id="ai-focus" 
-      className="editorial-section min-h-screen w-full bg-brand-bg relative flex items-center justify-center py-24 px-6 sm:px-10 lg:px-16 border-t border-brand-border/40"
+      className="editorial-section min-h-screen w-full bg-[#080808] text-[#F5F3EF] relative flex items-center justify-center py-24 px-6 sm:px-10 lg:px-16 border-t border-white/[0.06]"
     >
       <div className="w-full max-w-7xl mx-auto flex flex-col justify-between min-h-[80vh]">
         
         {/* Top Section Header */}
-        <div className="flex items-end justify-between border-b border-brand-border/40 pb-6 mb-10 text-left">
+        <div className="flex items-end justify-between border-b border-white/[0.08] pb-6 mb-10 text-left">
           <div>
-            <span className="editorial-tag text-xs text-brand-accent tracking-[0.25em] font-semibold block mb-2">
+            <span className="editorial-tag text-xs text-[#FF941F] tracking-[0.25em] font-semibold block mb-2">
               // METHODOLOGY
             </span>
-            <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-brand-textPrimary uppercase leading-none">
+            <h2 className="editorial-title text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight text-[#F5F3EF] uppercase leading-none">
               AI FOCUS
             </h2>
           </div>
 
-          <span className="editorial-number text-5xl sm:text-6xl font-light text-brand-textSecondary/25 tracking-tighter">
+          <span className="editorial-number text-5xl sm:text-6xl font-light text-[#929292]/25 tracking-tighter">
             04
           </span>
         </div>
@@ -51,14 +51,14 @@ export default function AISection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
-              className="editorial-title text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-brand-textPrimary uppercase leading-tight mb-6"
+              className="editorial-title text-4xl sm:text-6xl lg:text-7xl font-black tracking-tight text-[#F5F3EF] uppercase leading-tight mb-6"
             >
               BUILDING<br />
               INTELLIGENT<br />
-              <span className="text-brand-accent">SYSTEMS.</span>
+              <span className="text-[#FF941F]">SYSTEMS.</span>
             </motion.h3>
 
-            <p className="font-sans text-sm sm:text-base text-brand-textSecondary leading-relaxed max-w-lg font-normal">
+            <p className="font-sans text-sm sm:text-base text-[#929292] leading-relaxed max-w-lg font-normal">
               Specializing in the intersection of cognitive algorithms, machine learning models, and intuitive user experiences.
             </p>
           </div>
@@ -72,59 +72,59 @@ export default function AISection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="p-6 rounded-2xl border border-brand-border/80 bg-brand-card/70 backdrop-blur-sm"
+              className="p-6 rounded-2xl border border-white/[0.08] bg-[#111111] backdrop-blur-sm"
             >
-              <span className="font-mono text-[10px] tracking-widest text-brand-textSecondary uppercase block mb-4 text-left">
+              <span className="font-mono text-[10px] tracking-widest text-[#929292] uppercase block mb-4 text-left">
                 SYSTEM PIPELINE ARCHITECTURE
               </span>
 
               <div className="grid grid-cols-3 gap-2 sm:gap-4 items-center">
                 {/* 01. Input */}
-                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-brand-border/60 bg-brand-bg text-center">
-                  <Database size={16} className="text-brand-textSecondary mb-1.5" />
-                  <span className="font-mono text-[11px] font-bold text-brand-textPrimary uppercase tracking-wider">
+                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-white/[0.08] bg-[#0c0c0c] text-center">
+                  <Database size={16} className="text-[#929292] mb-1.5" />
+                  <span className="font-mono text-[11px] font-bold text-[#F5F3EF] uppercase tracking-wider">
                     INPUT
                   </span>
-                  <span className="text-[9px] text-brand-textSecondary mt-0.5">
+                  <span className="text-[9px] text-[#929292] mt-0.5">
                     Data / Prompts
                   </span>
                 </div>
 
                 {/* Arrow 1 */}
-                <div className="flex items-center justify-center text-brand-accent">
+                <div className="flex items-center justify-center text-[#FF941F]">
                   <ArrowRight size={16} className="animate-pulse" />
                 </div>
 
                 {/* 02. Model */}
-                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-brand-accent/40 bg-brand-accent/5 text-center">
-                  <Cpu size={16} className="text-brand-accent mb-1.5" />
-                  <span className="font-mono text-[11px] font-bold text-brand-accent uppercase tracking-wider">
+                <div className="flex flex-col items-center justify-center p-3 sm:p-4 rounded-xl border border-[#FF941F]/40 bg-[#FF941F]/10 text-center">
+                  <Cpu size={16} className="text-[#FF941F] mb-1.5" />
+                  <span className="font-mono text-[11px] font-bold text-[#FF941F] uppercase tracking-wider">
                     MODEL
                   </span>
-                  <span className="text-[9px] text-brand-textSecondary mt-0.5">
+                  <span className="text-[9px] text-[#929292] mt-0.5">
                     Neural Engine
                   </span>
                 </div>
               </div>
 
-              <div className="flex items-center justify-center my-2 text-brand-accent">
+              <div className="flex items-center justify-center my-2 text-[#FF941F]">
                 <ArrowRight size={16} className="rotate-90 animate-pulse" />
               </div>
 
               {/* 03. Output */}
-              <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl border border-brand-border/60 bg-brand-bg text-left">
+              <div className="flex items-center justify-between p-3 sm:p-4 rounded-xl border border-white/[0.08] bg-[#0c0c0c] text-left">
                 <div className="flex items-center gap-2.5">
-                  <Sparkles size={16} className="text-brand-accent" />
+                  <Sparkles size={16} className="text-[#FF941F]" />
                   <div>
-                    <span className="font-mono text-[11px] font-bold text-brand-textPrimary uppercase tracking-wider block">
+                    <span className="font-mono text-[11px] font-bold text-[#F5F3EF] uppercase tracking-wider block">
                       OUTPUT / ACTION
                     </span>
-                    <span className="text-[9px] text-brand-textSecondary">
+                    <span className="text-[9px] text-[#929292]">
                       Optimized Inference & Web Integration
                     </span>
                   </div>
                 </div>
-                <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest">
+                <span className="font-mono text-[10px] text-[#FF941F] uppercase tracking-widest font-semibold">
                   READY
                 </span>
               </div>
@@ -133,11 +133,11 @@ export default function AISection() {
             {/* Three Clean Focus Areas */}
             <div className="space-y-4 text-left">
               {pillars.map((item, idx) => (
-                <div key={item.title} className="pb-3 border-b border-brand-border/30 last:border-0">
-                  <h4 className="font-sans font-bold text-sm text-brand-textPrimary mb-1">
+                <div key={item.title} className="pb-3 border-b border-white/[0.06] last:border-0">
+                  <h4 className="font-sans font-bold text-sm text-[#F5F3EF] mb-1">
                     {item.title}
                   </h4>
-                  <p className="font-sans text-xs text-brand-textSecondary leading-relaxed">
+                  <p className="font-sans text-xs text-[#929292] leading-relaxed">
                     {item.desc}
                   </p>
                 </div>
